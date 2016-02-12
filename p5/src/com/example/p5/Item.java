@@ -8,5 +8,6 @@ public class Item {
 	public TextView txtRoom;
 	public TextView txtWeek;
 	public TextView txtCorpus;
+	
 
 }
