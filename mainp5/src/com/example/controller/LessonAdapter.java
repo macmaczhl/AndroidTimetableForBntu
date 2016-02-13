@@ -7,11 +7,15 @@ import java.util.List;
 
 import com.example.p5.R;
 import com.example.view.AddDialog;
+import com.example.view.FragmentOne;
 import com.example.view.MainActivity;
+import com.example.view.MainActivityNavig;
 import com.example.xml.LessonData;
 import com.example.xml.XMLSerialize;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -38,10 +42,10 @@ public class LessonAdapter extends BaseAdapter {
 	LayoutInflater lInflater;
 	int selected;
 	List<Lesson> allLessons = new ArrayList<Lesson>();
-	MainActivity act;
+	FragmentOne act;
 	AlertDialog.Builder ad;
 
-	public void SetActivity(MainActivity act) {
+	public void SetActivity(FragmentOne act) {
 		this.act = act;
 	}
 

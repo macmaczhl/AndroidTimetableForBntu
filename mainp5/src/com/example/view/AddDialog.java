@@ -10,9 +10,11 @@ import com.example.p5.R.layout;
 import com.example.xml.LessonData;
 import com.example.xml.XMLSerialize;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
@@ -26,7 +28,7 @@ public class AddDialog extends DialogFragment implements
 	String title;
 	Spinner spinner2;
 	Spinner spinner3;
-	MainActivity act;
+	FragmentOne act;
 	boolean isEdit;
 	int posEdit;
 	LessonData lessonData;
@@ -42,7 +44,7 @@ public class AddDialog extends DialogFragment implements
 		posEdit = position;
 	}
 
-	public void SetActivity(MainActivity act) {
+	public void SetActivity(FragmentOne act) {
 		this.act = act;
 	}
 

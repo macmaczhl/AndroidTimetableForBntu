@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
 		case R.id.buttonAdd:
 			AddDialog dlg1 = new AddDialog();
 			dlg1.show(getFragmentManager(), "228");
-			dlg1.SetActivity(this);
+			//dlg1.SetActivity(this);
 			break;
 		}
 	}
@@ -84,7 +84,7 @@ public class MainActivity extends Activity {
 					currentList.add(obj);
 			}
 			LessonAdapter adapter = new LessonAdapter(this, currentList);
-			adapter.SetActivity(this);
+			//adapter.SetActivity(this);
 			if (allLessons.isEmpty())
 				mylist.setAdapter(null);
 			else {
