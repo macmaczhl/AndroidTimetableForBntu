@@ -6,6 +6,8 @@ import com.example.p5.R.layout;
 import com.example.p5.R.menu;
 import com.example.p5.R.string;
 import com.example.view.fragments.FragmentOne;
+import com.example.view.fragments.FragmentThree;
+import com.example.view.fragments.FragmentTwo;
 
 import android.app.Activity;
 import android.app.ActionBar;
@@ -30,8 +32,10 @@ public class MainActivityNavig extends Activity implements
 
 	Spinner spinner;
 	public static int selected;
-	
-	FragmentOne fragment;
+
+	FragmentOne fragment1 = null;
+	FragmentTwo fragment2 = null;
+	FragmentThree fragment3 = null;
 
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the
@@ -64,21 +68,27 @@ public class MainActivityNavig extends Activity implements
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getFragmentManager();
 
-
 		switch (position) {
 		case 0:
-			fragment = new FragmentOne();
+			if (fragment1 == null)
+				fragment1 = new FragmentOne();
+			fragmentManager.beginTransaction()
+					.replace(R.id.container, fragment1).commit();
 			break;
 		case 1:
-			fragment = new FragmentOne();
+			if (fragment2 == null)
+			fragment2 = new FragmentTwo();
+			fragmentManager.beginTransaction()
+					.replace(R.id.container, fragment2).commit();
 			break;
 		default:
-			fragment = new FragmentOne();
+			if (fragment3 == null)
+			fragment3 = new FragmentThree();
+			fragmentManager.beginTransaction()
+					.replace(R.id.container, fragment3).commit();
 			break;
 		}
 
-		fragmentManager.beginTransaction().replace(R.id.container, fragment)
-				.commit();
 	}
 
 	public void onSectionAttached(int number) {
@@ -166,13 +176,13 @@ public class MainActivityNavig extends Activity implements
 					.getInt(ARG_SECTION_NUMBER));
 		}
 	}
-	
+
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.buttonAdd:
 			AddDialog dlg1 = new AddDialog();
 			dlg1.show(getFragmentManager(), "228");
-			dlg1.SetActivity(fragment);
+			dlg1.SetActivity(fragment1);
 			break;
 		}
 	}
