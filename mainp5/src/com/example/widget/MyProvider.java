@@ -1,7 +1,12 @@
-package com.example.p5;
+package com.example.widget;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import com.example.p5.R;
+import com.example.p5.R.id;
+import com.example.p5.R.layout;
+
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;

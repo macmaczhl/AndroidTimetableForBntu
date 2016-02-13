@@ -1,10 +1,12 @@
-package com.example.p5;
+package com.example.xml;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
+
+import com.example.controller.Lesson;
 
 @Root(name = "lessons")
 public class LessonData {

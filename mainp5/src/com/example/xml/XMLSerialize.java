@@ -1,4 +1,4 @@
-package com.example.p5;
+package com.example.xml;
 
 import java.io.File;
 import org.simpleframework.xml.Serializer;

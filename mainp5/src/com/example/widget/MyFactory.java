@@ -1,9 +1,15 @@
-package com.example.p5;
+package com.example.widget;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import com.example.controller.Lesson;
+import com.example.p5.R;
+import com.example.p5.R.id;
+import com.example.p5.R.layout;
+import com.example.xml.XMLSerialize;
 
 import android.annotation.SuppressLint;
 import android.appwidget.AppWidgetManager;

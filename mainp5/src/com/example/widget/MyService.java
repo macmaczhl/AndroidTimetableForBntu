@@ -1,4 +1,4 @@
-package com.example.p5;
+package com.example.widget;
 
 import android.content.Intent;
 import android.widget.RemoteViewsService;

@@ -1,9 +1,15 @@
-package com.example.p5;
+package com.example.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
+import com.example.p5.R;
+import com.example.view.AddDialog;
+import com.example.view.MainActivity;
+import com.example.xml.LessonData;
+import com.example.xml.XMLSerialize;
 
 import android.app.AlertDialog;
 import android.content.Context;
