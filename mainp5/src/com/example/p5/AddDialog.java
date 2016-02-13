@@ -12,7 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class AddDialog extends DialogFragment implements DialogInterface.OnClickListener {
+public class AddDialog extends DialogFragment implements
+		DialogInterface.OnClickListener {
 	private View form = null;
 	String title;
 	Spinner spinner2;
@@ -40,17 +41,20 @@ public class AddDialog extends DialogFragment implements DialogInterface.OnClick
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-		form = getActivity().getLayoutInflater().inflate(R.layout.dialogadd, null);
+		form = getActivity().getLayoutInflater().inflate(R.layout.dialogadd,
+				null);
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		
+
 		spinner2 = (Spinner) form.findViewById(R.id.spinner3);
-		ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(), R.array.week,
+		ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(
+				getActivity(), R.array.week,
 				android.R.layout.simple_spinner_item);
 		adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner2.setAdapter(adapter2);
-		
+
 		spinner3 = (Spinner) form.findViewById(R.id.spinner4);
-		ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(getActivity(), R.array.types,
+		ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(
+				getActivity(), R.array.types,
 				android.R.layout.simple_spinner_item);
 		adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner3.setAdapter(adapter3);
@@ -63,17 +67,14 @@ public class AddDialog extends DialogFragment implements DialogInterface.OnClick
 		}
 		if (isEdit) {
 			EditText timeBox = (EditText) form.findViewById(R.id.item_time);
-			EditText subjectBox = (EditText) form.findViewById(R.id.item_subject);
-			EditText classroomBox = (EditText) form.findViewById(R.id.item_classroom);
+			EditText subjectBox = (EditText) form
+					.findViewById(R.id.item_subject);
+			EditText classroomBox = (EditText) form
+					.findViewById(R.id.item_classroom);
 			EditText corpusBox = (EditText) form.findViewById(R.id.item_corpus);
-			
-			
-			
-			
-			
+
 			spinner2.setSelection(lessonData.list.get(posEdit).getWeek());
-			
-			
+
 			spinner3.setSelection(lessonData.list.get(posEdit).getType());
 
 			timeBox.setText(lessonData.list.get(posEdit).getDate());
@@ -82,7 +83,8 @@ public class AddDialog extends DialogFragment implements DialogInterface.OnClick
 			corpusBox.setText(lessonData.list.get(posEdit).getCorpus());
 		}
 
-		return (builder.setTitle(title).setView(form).setPositiveButton(android.R.string.ok, this)
+		return (builder.setTitle(title).setView(form)
+				.setPositiveButton(android.R.string.ok, this)
 				.setNegativeButton(android.R.string.cancel, null).create());
 	}
 
@@ -93,8 +95,9 @@ public class AddDialog extends DialogFragment implements DialogInterface.OnClick
 		EditText timeBox = (EditText) form.findViewById(R.id.item_time);
 		EditText subjectBox = (EditText) form.findViewById(R.id.item_subject);
 		EditText corpusBox = (EditText) form.findViewById(R.id.item_corpus);
-		EditText classroomBox = (EditText) form.findViewById(R.id.item_classroom);
-		String time = null, subject = null,corpus = null, classroom = null;
+		EditText classroomBox = (EditText) form
+				.findViewById(R.id.item_classroom);
+		String time = null, subject = null, corpus = null, classroom = null;
 		time = timeBox.getText().toString();
 		subject = subjectBox.getText().toString();
 		corpus = corpusBox.getText().toString();
@@ -109,10 +112,11 @@ public class AddDialog extends DialogFragment implements DialogInterface.OnClick
 			corpus = " ";
 		if (classroom.isEmpty())
 			classroom = " ";
-		
+
 		try {
 			Lesson lesson = new Lesson();
-			lesson.FillLesson(time, subject,corpus, classroom, dayOfWeek,week,type);
+			lesson.FillLesson(time, subject, corpus, classroom, dayOfWeek,
+					week, type);
 			if (isEdit) {
 				lessonData.list.set(posEdit, lesson);
 			} else {

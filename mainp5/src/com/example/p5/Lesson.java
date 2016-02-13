@@ -21,7 +21,8 @@ public class Lesson implements Comparable<Lesson> {
 	private int week;
 
 	@SuppressLint("SimpleDateFormat")
-	public void FillLesson(String time, String subjname,String corpus, String classroom, int day,int week,int type) {
+	public void FillLesson(String time, String subjname, String corpus,
+			String classroom, int day, int week, int type) {
 		DateFormat format = new SimpleDateFormat("hh:mm");
 		Date timetemp = new Date();
 		try {
@@ -38,7 +39,6 @@ public class Lesson implements Comparable<Lesson> {
 		this.corpus = corpus;
 		this.type = type;
 	}
-	
 
 	@SuppressLint("SimpleDateFormat")
 	public Lesson() {
@@ -88,7 +88,7 @@ public class Lesson implements Comparable<Lesson> {
 
 		this.time = timetemp;
 	}
-	
+
 	@Element(name = "corpus")
 	public String getCorpus() {
 		return corpus;
@@ -108,41 +108,39 @@ public class Lesson implements Comparable<Lesson> {
 	public void setClassRoom(String classroom) {
 		this.classroom = classroom;
 	}
-	
+
 	@Element(name = "week")
-	public void setWeek(int week){
+	public void setWeek(int week) {
 		this.week = week;
 	}
 
 	@Element(name = "week")
-	public int getWeek()
-	{
+	public int getWeek() {
 		return week;
 	}
 
-	
 	@Element(name = "type")
-	public void setType(int type){
+	public void setType(int type) {
 		this.type = type;
 	}
 
 	@Element(name = "type")
-	public int getType()
-	{
+	public int getType() {
 		return type;
 	}
-	
 
 	@Override
 	public boolean equals(Object obj) {
 		Lesson lesson = (Lesson) obj;
-		if (this.time.equals(lesson.time) && this.day == lesson.day && this.subject.equals(lesson.subject)
-				&& this.corpus.equals(lesson.corpus) && this.classroom.equals(lesson.classroom) && this.week == lesson.week)
+		if (this.time.equals(lesson.time) && this.day == lesson.day
+				&& this.subject.equals(lesson.subject)
+				&& this.corpus.equals(lesson.corpus)
+				&& this.classroom.equals(lesson.classroom)
+				&& this.week == lesson.week)
 			return true;
 		else
 			return false;
 	}
-
 
 	@Override
 	public int compareTo(Lesson arg0) {

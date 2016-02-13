@@ -24,22 +24,23 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
-				getResources().getStringArray(R.array.weekday));
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, getResources()
+						.getStringArray(R.array.weekday));
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner = (Spinner) findViewById(R.id.spinner1);
 		spinner.setAdapter(adapter);
-		
+
 		Calendar calendar = Calendar.getInstance();
-		spinner.setSelection(calendar.get(Calendar.DAY_OF_WEEK)-1);
+		spinner.setSelection(calendar.get(Calendar.DAY_OF_WEEK) - 1);
 
 		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
-			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
 				selected = spinner.getSelectedItemPosition() + 1;
-				if(selected == 8)
+				if (selected == 8)
 					selected = 7;
 				ShowList();
 			}

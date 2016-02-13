@@ -14,7 +14,7 @@ public class LessonData {
 	public LessonData() {
 
 	}
-	
+
 	public void clear() {
 		list.clear();
 	}

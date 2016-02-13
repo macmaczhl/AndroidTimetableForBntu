@@ -28,7 +28,8 @@ public class MyFactory implements RemoteViewsFactory {
 		listLessons = new ArrayList<Lesson>();
 		context = ctx;
 		sdf = new SimpleDateFormat("HH:mm:ss");
-		widgetID = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
+		widgetID = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+				AppWidgetManager.INVALID_APPWIDGET_ID);
 
 	}
 
@@ -55,22 +56,28 @@ public class MyFactory implements RemoteViewsFactory {
 	@Override
 	public RemoteViews getViewAt(int position) {
 
-		RemoteViews rView = new RemoteViews(context.getPackageName(), R.layout.item);
+		RemoteViews rView = new RemoteViews(context.getPackageName(),
+				R.layout.item);
 
 		rView.setTextViewText(R.id.tvDate, listLessons.get(position).getDate());
-		rView.setTextViewText(R.id.tvCorpus, listLessons.get(position).getCorpus());
-		rView.setTextViewText(R.id.tvRoom, listLessons.get(position).getClassRoom());
-		switch(listLessons.get(position).getType())
-		{
+		rView.setTextViewText(R.id.tvCorpus, listLessons.get(position)
+				.getCorpus());
+		rView.setTextViewText(R.id.tvRoom, listLessons.get(position)
+				.getClassRoom());
+		switch (listLessons.get(position).getType()) {
 		case 0:
-			SpannableString spanString = new SpannableString(listLessons.get(position).getSubject());
-			spanString.setSpan(new StyleSpan(Typeface.BOLD), 0, spanString.length(), 0);
+			SpannableString spanString = new SpannableString(listLessons.get(
+					position).getSubject());
+			spanString.setSpan(new StyleSpan(Typeface.BOLD), 0,
+					spanString.length(), 0);
 			rView.setTextViewText(R.id.tvSubj, spanString);
 			break;
 		case 1:
-			
-			spanString = new SpannableString(listLessons.get(position).getSubject());
-			spanString.setSpan(new StyleSpan(Typeface.ITALIC), 0, spanString.length(), 0);
+
+			spanString = new SpannableString(listLessons.get(position)
+					.getSubject());
+			spanString.setSpan(new StyleSpan(Typeface.ITALIC), 0,
+					spanString.length(), 0);
 			rView.setTextViewText(R.id.tvSubj, spanString);
 
 			break;
@@ -93,8 +100,8 @@ public class MyFactory implements RemoteViewsFactory {
 
 		SimpleDateFormat sdf2 = new SimpleDateFormat("w");
 		Date d = new Date();
-		int week = Integer.valueOf(sdf2.format(d));//четный - первая
-		if(week%2==0)
+		int week = Integer.valueOf(sdf2.format(d));// четный - первая
+		if (week % 2 == 0)
 			week = 1;
 		else
 			week = 2;
@@ -104,7 +111,7 @@ public class MyFactory implements RemoteViewsFactory {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			allLessons = new ArrayList(); 
+			allLessons = new ArrayList();
 		}
 		listLessons.clear();
 
