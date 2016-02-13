@@ -2,6 +2,7 @@ package com.example.widget;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService.RemoteViewsFactory;
 
@@ -104,9 +106,8 @@ public class MyFactory implements RemoteViewsFactory {
 	@Override
 	public void onDataSetChanged() {
 
-		SimpleDateFormat sdf2 = new SimpleDateFormat("w");
-		Date d = new Date();
-		int week = Integer.valueOf(sdf2.format(d));// четный - первая
+		int week = MyProvider.calendar.get(Calendar.WEEK_OF_YEAR);// четный - первая
+		Log.d("week", String.valueOf(week));
 		if (week % 2 == 0)
 			week = 1;
 		else
@@ -123,7 +124,7 @@ public class MyFactory implements RemoteViewsFactory {
 
 		try {
 			for (Lesson obj : allLessons) {
-				if (obj.getDay() == MyProvider.dayOfTheWeek)
+				if (obj.getDay() == MyProvider.calendar.get(Calendar.DAY_OF_WEEK))
 					if (obj.getWeek() == week || obj.getWeek() == 0)
 						listLessons.add(obj);
 			}

@@ -15,7 +15,8 @@
         <TextView
             android:id="@+id/tvPrev"
             android:layout_width="50dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.19"
             android:background="#ffffff00"
             android:gravity="center"
             android:text="&lt;&lt;"
@@ -25,27 +26,43 @@
 
         </TextView>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1.61"
+            android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/tvUpdate"
-            android:layout_width="154dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.66"
-            android:background="#3300ff00"
-            android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceLarge" >
-        </TextView>
+            <TextView
+                android:id="@+id/tvSelectedDate"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:background="#3300ff00"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/tvUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:background="#3300ff00"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="20sp" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tvNext"
             android:layout_width="50dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.24"
             android:background="#ffffff00"
             android:gravity="center"
             android:text=">>"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textStyle="bold" 
-        	android:textColor="#000">
+            android:textColor="#000"
+            android:textStyle="bold" >
         
         </TextView>
     </LinearLayout>

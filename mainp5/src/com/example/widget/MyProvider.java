@@ -2,6 +2,8 @@ package com.example.widget;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import com.example.p5.R;
 import com.example.p5.R.id;
@@ -26,14 +28,14 @@ public class MyProvider extends AppWidgetProvider {
 	final static String ACTION_CURRENT = "com.example.p5.clkCurr";
 	int week;
 	SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
-	static Calendar calendar = Calendar.getInstance();
-	public static int dayOfTheWeek;
+	public static Calendar calendar = Calendar.getInstance();
+	//public static int dayOfTheWeek;
 
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager,
 			int[] appWidgetIds) {
 		super.onUpdate(context, appWidgetManager, appWidgetIds);
-		dayOfTheWeek = calendar.get(Calendar.DAY_OF_WEEK);
+		//dayOfTheWeek = calendar.get(Calendar.DAY_OF_WEEK);
 		for (int i : appWidgetIds) {
 			updateWidget(context, appWidgetManager, i);
 		}
@@ -43,7 +45,8 @@ public class MyProvider extends AppWidgetProvider {
 			int appWidgetId) {
 		RemoteViews rv = new RemoteViews(context.getPackageName(),
 				R.layout.widget);
-		rv.setTextViewText(R.id.tvUpdate, days[dayOfTheWeek]);
+		rv.setTextViewText(R.id.tvUpdate, days[calendar.get(Calendar.DAY_OF_WEEK)]);
+		rv.setTextViewText(R.id.tvSelectedDate, String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)) + " " + calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()));
 
 		Intent updIntent = new Intent(context, MyProvider.class);
 		updIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
@@ -71,6 +74,7 @@ public class MyProvider extends AppWidgetProvider {
 		PendingIntent updPIntent = PendingIntent.getBroadcast(context,
 				appWidgetId, updIntent, 0);
 		rv.setOnClickPendingIntent(R.id.tvUpdate, updPIntent);
+		rv.setOnClickPendingIntent(R.id.tvSelectedDate, updPIntent);
 	}
 
 	void setUpdatePrev(RemoteViews rv, Context context, int appWidgetId) {
@@ -111,21 +115,19 @@ public class MyProvider extends AppWidgetProvider {
 			mAppWidgetId = mas[0];
 
 		if (intent.getAction().equalsIgnoreCase(ACTION_PREV)) {
-			dayOfTheWeek--;
+			//dayOfTheWeek--;
 
-			if (dayOfTheWeek == 0)
-				dayOfTheWeek = 7;
+			calendar.add(Calendar.DAY_OF_MONTH, -1);
 
 		}
 		if (intent.getAction().equalsIgnoreCase(ACTION_NEXT)) {
 
-			dayOfTheWeek++;
-			if (dayOfTheWeek == 8)
-				dayOfTheWeek = 1;
+			calendar.add(Calendar.DAY_OF_MONTH, 1);
 
 		} else if (intent.getAction().equalsIgnoreCase(ACTION_CURRENT)) {
 
-			dayOfTheWeek = calendar.get(Calendar.DAY_OF_WEEK);
+			calendar = Calendar.getInstance();
+			//dayOfTheWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
 		}
 		Log.d("azaza2", String.valueOf(mAppWidgetId));
