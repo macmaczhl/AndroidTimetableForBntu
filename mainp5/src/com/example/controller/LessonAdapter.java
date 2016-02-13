@@ -7,9 +7,8 @@ import java.util.List;
 
 import com.example.p5.R;
 import com.example.view.AddDialog;
-import com.example.view.FragmentOne;
-import com.example.view.MainActivity;
 import com.example.view.MainActivityNavig;
+import com.example.view.fragments.FragmentOne;
 import com.example.xml.LessonData;
 import com.example.xml.XMLSerialize;
 
@@ -107,7 +106,7 @@ public class LessonAdapter extends BaseAdapter {
 		txtWeek = (TextView) view.findViewById(R.id.tvWeek);
 		txtWeek.setText(String.valueOf(p.getWeek()));
 
-		selected = MainActivity.selected;
+		selected = MainActivityNavig.selected;
 
 		Item item = new Item();
 		item.txtDate = txtDate;

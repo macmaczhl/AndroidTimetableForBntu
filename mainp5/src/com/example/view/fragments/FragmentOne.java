@@ -1,4 +1,4 @@
-package com.example.view;
+package com.example.view.fragments;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -7,37 +7,51 @@ import java.util.List;
 import com.example.controller.Lesson;
 import com.example.controller.LessonAdapter;
 import com.example.p5.R;
-import com.example.p5.R.array;
-import com.example.p5.R.id;
-import com.example.p5.R.layout;
-import com.example.p5.R.menu;
+import com.example.view.AddDialog;
 import com.example.xml.XMLSerialize;
 
-import android.app.Activity;
+import android.app.Fragment;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.AdapterView.OnItemSelectedListener;
 
-public class MainActivity extends Activity {
+public class FragmentOne extends Fragment {
 	Spinner spinner;
 	public static int selected;
-
+	
+	View bufView;
+	
+	public FragmentOne()
+	{
+		
+	}
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+	
+		View rootView = inflater.inflate(R.layout.fragment1, container,
+				false);
+		
+		return rootView;
+	}
+	
+	@Override
+	public void onViewCreated(View viewMain, Bundle savedInstanceState) {
+		//////////////////
+		bufView = viewMain;
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
 				android.R.layout.simple_spinner_item, getResources()
 						.getStringArray(R.array.weekday));
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner = (Spinner) findViewById(R.id.spinner1);
+		spinner = (Spinner) viewMain.findViewById(R.id.spinner1);
 		spinner.setAdapter(adapter);
 
 		Calendar calendar = Calendar.getInstance();
@@ -58,22 +72,12 @@ public class MainActivity extends Activity {
 			public void onNothingSelected(AdapterView<?> arg0) {
 			}
 		});
-
+		///////////////////
 	}
-
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.buttonAdd:
-			AddDialog dlg1 = new AddDialog();
-			dlg1.show(getFragmentManager(), "228");
-			//dlg1.SetActivity(this);
-			break;
-		}
-	}
-
+	
 	public void ShowList() {
 
-		ListView mylist = (ListView) findViewById(R.id.gridView);
+		ListView mylist = (ListView) bufView.findViewById(R.id.gridView);
 		try {
 			List<Lesson> allLessons = new ArrayList<Lesson>();
 			List<Lesson> currentList = new ArrayList<Lesson>();
@@ -83,8 +87,8 @@ public class MainActivity extends Activity {
 				if (obj.getDay() == selected)
 					currentList.add(obj);
 			}
-			LessonAdapter adapter = new LessonAdapter(this, currentList);
-			//adapter.SetActivity(this);
+			LessonAdapter adapter = new LessonAdapter(getActivity(), currentList);
+			adapter.SetActivity(this);
 			if (allLessons.isEmpty())
 				mylist.setAdapter(null);
 			else {
@@ -97,24 +101,14 @@ public class MainActivity extends Activity {
 			mylist.setAdapter(null);
 		}
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+	
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.buttonAdd:
+			AddDialog dlg1 = new AddDialog();
+			dlg1.show(getFragmentManager(), "228");
+			dlg1.SetActivity(this);
+			break;
 		}
-		return super.onOptionsItemSelected(item);
 	}
-
 }

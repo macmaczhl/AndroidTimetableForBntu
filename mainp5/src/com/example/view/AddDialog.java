@@ -7,6 +7,7 @@ import com.example.p5.R;
 import com.example.p5.R.array;
 import com.example.p5.R.id;
 import com.example.p5.R.layout;
+import com.example.view.fragments.FragmentOne;
 import com.example.xml.LessonData;
 import com.example.xml.XMLSerialize;
 
@@ -112,7 +113,7 @@ public class AddDialog extends DialogFragment implements
 		subject = subjectBox.getText().toString();
 		corpus = corpusBox.getText().toString();
 		classroom = classroomBox.getText().toString();
-		int dayOfWeek = MainActivity.selected;
+		int dayOfWeek = MainActivityNavig.selected;
 		int week = spinner2.getSelectedItemPosition();
 		int type = spinner3.getSelectedItemPosition();
 
