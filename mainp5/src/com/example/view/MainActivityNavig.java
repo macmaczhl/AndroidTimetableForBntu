@@ -31,7 +31,6 @@ public class MainActivityNavig extends Activity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
 
 	Spinner spinner;
-	public static int selected;
 
 	FragmentOne fragment1 = null;
 	FragmentTwo fragment2 = null;
@@ -181,7 +180,7 @@ public class MainActivityNavig extends Activity implements
 		switch (v.getId()) {
 		case R.id.buttonAdd:
 			AddDialog dlg1 = new AddDialog();
-			dlg1.show(getFragmentManager(), "228");
+			dlg1.show(fragment1.getFragmentManager(), "228");
 			dlg1.SetActivity(fragment1);
 			break;
 		}

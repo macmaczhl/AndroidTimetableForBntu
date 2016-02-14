@@ -16,6 +16,7 @@ import android.annotation.SuppressLint;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
@@ -66,12 +67,54 @@ public class MyFactory implements RemoteViewsFactory {
 
 		RemoteViews rView = new RemoteViews(context.getPackageName(),
 				R.layout.item);
-
+		
 		rView.setTextViewText(R.id.tvDate, listLessons.get(position).getDate());
 		rView.setTextViewText(R.id.tvCorpus, listLessons.get(position)
 				.getCorpus());
 		rView.setTextViewText(R.id.tvRoom, listLessons.get(position)
 				.getClassRoom());
+		Date currentDate = new Date();
+		
+		boolean ifCurrentLesson = false;
+		/*try
+		{
+			ifCurrentLesson = MyProvider.calendar.get(Calendar.DAY_OF_YEAR)== Calendar.getInstance().get(Calendar.DAY_OF_YEAR) &&
+					currentDate.getTime()>listLessons.get(position).getDateOriginal().getTime() &&
+					currentDate.getTime()<listLessons.get(position+1).getDateOriginal().getTime();
+
+		}
+		catch(IndexOutOfBoundsException e)
+		{
+			ifCurrentLesson = MyProvider.calendar.get(Calendar.DAY_OF_YEAR)== Calendar.getInstance().get(Calendar.DAY_OF_YEAR) &&
+					currentDate.getTime()>listLessons.get(position).getDateOriginal().getTime();
+		}*/
+		if(ifCurrentLesson)
+		{
+			rView.setInt(R.id.tvDate, "setBackgroundColor", 
+			        android.graphics.Color.RED);
+			rView.setInt(R.id.tvSubj, "setBackgroundColor", 
+			        android.graphics.Color.RED);
+			rView.setInt(R.id.tvCorpus, "setBackgroundColor", 
+			        android.graphics.Color.RED);
+			rView.setInt(R.id.tvRoom, "setBackgroundColor", 
+			        android.graphics.Color.RED);
+		}
+		else
+		{
+			rView.setInt(R.id.tvDate, "setBackgroundColor", 
+			        Color.TRANSPARENT);
+			rView.setInt(R.id.tvSubj, "setBackgroundColor", 
+					Color.TRANSPARENT);
+			rView.setInt(R.id.tvCorpus, "setBackgroundColor", 
+					Color.TRANSPARENT);
+			rView.setInt(R.id.tvRoom, "setBackgroundColor", 
+					Color.TRANSPARENT);
+		}
+		
+		
+			
+		
+		
 		switch (listLessons.get(position).getType()) {
 		case 0:
 			SpannableString spanString = new SpannableString(listLessons.get(

@@ -75,6 +75,10 @@ public class Lesson implements Comparable<Lesson> {
 		DateFormat format = new SimpleDateFormat("HH:mm");
 		return format.format(time);
 	}
+	
+	public Date getDateOriginal() {
+		return time;
+	}
 
 	@Element(name = "date")
 	public void setDate(String time) {

@@ -18,6 +18,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -71,6 +72,7 @@ public class AddDialog extends DialogFragment implements
 		spinner3.setAdapter(adapter3);
 		try {
 			lessonData = XMLSerialize.read();
+			Log.d("issss", "???");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -113,7 +115,7 @@ public class AddDialog extends DialogFragment implements
 		subject = subjectBox.getText().toString();
 		corpus = corpusBox.getText().toString();
 		classroom = classroomBox.getText().toString();
-		int dayOfWeek = MainActivityNavig.selected;
+		int dayOfWeek = FragmentOne.selected;
 		int week = spinner2.getSelectedItemPosition();
 		int type = spinner3.getSelectedItemPosition();
 

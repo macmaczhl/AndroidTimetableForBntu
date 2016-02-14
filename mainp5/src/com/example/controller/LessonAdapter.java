@@ -20,6 +20,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -106,7 +107,7 @@ public class LessonAdapter extends BaseAdapter {
 		txtWeek = (TextView) view.findViewById(R.id.tvWeek);
 		txtWeek.setText(String.valueOf(p.getWeek()));
 
-		selected = MainActivityNavig.selected;
+		selected = FragmentOne.selected;
 
 		Item item = new Item();
 		item.txtDate = txtDate;
@@ -144,7 +145,6 @@ public class LessonAdapter extends BaseAdapter {
 					if (allLessons.get(i).equals(temp))
 						posEdit = i;
 				}
-
 				AddDialog dlg1 = new AddDialog(posEdit);
 				dlg1.show(act.getFragmentManager(), "228");
 				dlg1.SetActivity(act);

@@ -10,6 +10,7 @@ import com.example.p5.R;
 import com.example.view.AddDialog;
 import com.example.xml.XMLSerialize;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,8 +31,8 @@ public class FragmentOne extends Fragment {
 	
 	public FragmentOne()
 	{
-		
 	}
+	
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -103,12 +104,12 @@ public class FragmentOne extends Fragment {
 	}
 	
 	public void onClick(View v) {
-		switch (v.getId()) {
+		/*switch (v.getId()) {
 		case R.id.buttonAdd:
 			AddDialog dlg1 = new AddDialog();
 			dlg1.show(getFragmentManager(), "228");
 			dlg1.SetActivity(this);
 			break;
-		}
+		}*/
 	}
 }
