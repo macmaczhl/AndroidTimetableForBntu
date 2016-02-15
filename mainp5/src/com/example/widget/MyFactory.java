@@ -1,5 +1,6 @@
 package com.example.widget;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -61,6 +62,25 @@ public class MyFactory implements RemoteViewsFactory {
 	public RemoteViews getLoadingView() {
 		return null;
 	}
+	
+	static public int compareDate(Date arg1,Date arg2)
+	{
+		DateFormat format = new SimpleDateFormat("hh");
+		if(Integer.valueOf(format.format(arg1)) < Integer.valueOf(format.format(arg2)))
+			return -1;			
+		if(Integer.valueOf(format.format(arg1)) > Integer.valueOf(format.format(arg2)))
+			return 1;
+		if(Integer.valueOf(format.format(arg1)) == Integer.valueOf(format.format(arg2)))
+		{
+			format = new SimpleDateFormat("mm");
+			if(Integer.valueOf(format.format(arg1)) < Integer.valueOf(format.format(arg2)))
+				return -1;			
+			if(Integer.valueOf(format.format(arg1)) > Integer.valueOf(format.format(arg2)))
+				return 1;
+			return 0;			
+		}
+		return 0;			
+	}
 
 	@Override
 	public RemoteViews getViewAt(int position) {
@@ -76,18 +96,18 @@ public class MyFactory implements RemoteViewsFactory {
 		Date currentDate = new Date();
 		
 		boolean ifCurrentLesson = false;
-		/*try
+		try
 		{
 			ifCurrentLesson = MyProvider.calendar.get(Calendar.DAY_OF_YEAR)== Calendar.getInstance().get(Calendar.DAY_OF_YEAR) &&
-					currentDate.getTime()>listLessons.get(position).getDateOriginal().getTime() &&
-					currentDate.getTime()<listLessons.get(position+1).getDateOriginal().getTime();
+					compareDate(currentDate,listLessons.get(position).getDateOriginal())>0 &&
+					compareDate(currentDate,listLessons.get(position+1).getDateOriginal())<0;	
 
 		}
 		catch(IndexOutOfBoundsException e)
 		{
 			ifCurrentLesson = MyProvider.calendar.get(Calendar.DAY_OF_YEAR)== Calendar.getInstance().get(Calendar.DAY_OF_YEAR) &&
-					currentDate.getTime()>listLessons.get(position).getDateOriginal().getTime();
-		}*/
+					compareDate(currentDate,listLessons.get(position).getDateOriginal())>0;
+		}
 		if(ifCurrentLesson)
 		{
 			rView.setInt(R.id.tvDate, "setBackgroundColor", 

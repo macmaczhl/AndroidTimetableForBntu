@@ -30,7 +30,6 @@ import android.widget.TextView;
 public class MainActivityNavig extends Activity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
 
-	Spinner spinner;
 
 	FragmentOne fragment1 = null;
 	FragmentTwo fragment2 = null;
