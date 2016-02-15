@@ -2,12 +2,9 @@ package com.example.widget;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 import com.example.p5.R;
-import com.example.p5.R.id;
-import com.example.p5.R.layout;
 
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
@@ -16,7 +13,6 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 @SuppressLint("SimpleDateFormat")
@@ -130,7 +126,6 @@ public class MyProvider extends AppWidgetProvider {
 			//dayOfTheWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
 		}
-		Log.d("azaza2", String.valueOf(mAppWidgetId));
 		updateWidget(context, AppWidgetManager.getInstance(context),
 				mAppWidgetId);
 

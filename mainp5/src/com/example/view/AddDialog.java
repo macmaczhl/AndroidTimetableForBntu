@@ -4,18 +4,13 @@ import java.util.Collections;
 
 import com.example.controller.Lesson;
 import com.example.p5.R;
-import com.example.p5.R.array;
-import com.example.p5.R.id;
-import com.example.p5.R.layout;
 import com.example.view.fragments.FragmentOne;
 import com.example.xml.LessonData;
 import com.example.xml.XMLSerialize;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;

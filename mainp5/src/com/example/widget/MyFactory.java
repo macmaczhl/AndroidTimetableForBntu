@@ -1,6 +1,7 @@
 package com.example.widget;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -9,8 +10,6 @@ import java.util.List;
 
 import com.example.controller.Lesson;
 import com.example.p5.R;
-import com.example.p5.R.id;
-import com.example.p5.R.layout;
 import com.example.xml.XMLSerialize;
 
 import android.annotation.SuppressLint;
@@ -21,7 +20,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
-import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService.RemoteViewsFactory;
 
@@ -63,25 +61,9 @@ public class MyFactory implements RemoteViewsFactory {
 		return null;
 	}
 	
-	static public int compareDate(Date arg1,Date arg2)
-	{
-		DateFormat format = new SimpleDateFormat("hh");
-		if(Integer.valueOf(format.format(arg1)) < Integer.valueOf(format.format(arg2)))
-			return -1;			
-		if(Integer.valueOf(format.format(arg1)) > Integer.valueOf(format.format(arg2)))
-			return 1;
-		if(Integer.valueOf(format.format(arg1)) == Integer.valueOf(format.format(arg2)))
-		{
-			format = new SimpleDateFormat("mm");
-			if(Integer.valueOf(format.format(arg1)) < Integer.valueOf(format.format(arg2)))
-				return -1;			
-			if(Integer.valueOf(format.format(arg1)) > Integer.valueOf(format.format(arg2)))
-				return 1;
-			return 0;			
-		}
-		return 0;			
-	}
-
+	
+	
+	
 	@Override
 	public RemoteViews getViewAt(int position) {
 
@@ -96,18 +78,18 @@ public class MyFactory implements RemoteViewsFactory {
 		Date currentDate = new Date();
 		
 		boolean ifCurrentLesson = false;
-		try
-		{
-			ifCurrentLesson = MyProvider.calendar.get(Calendar.DAY_OF_YEAR)== Calendar.getInstance().get(Calendar.DAY_OF_YEAR) &&
-					compareDate(currentDate,listLessons.get(position).getDateOriginal())>0 &&
-					compareDate(currentDate,listLessons.get(position+1).getDateOriginal())<0;	
+			Date dateTemp  = listLessons.get(position).getDateOriginal();
+				try {
+					ifCurrentLesson = MyProvider.calendar.get(Calendar.DAY_OF_YEAR)== Calendar.getInstance().get(Calendar.DAY_OF_YEAR) &&
+							Lesson.compareDate(currentDate,listLessons.get(position).getDateOriginal())>0 &&
+							Lesson.compareDate(currentDate,Lesson.AddDate(dateTemp, 1, 35))<0;
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+			
 
-		}
-		catch(IndexOutOfBoundsException e)
-		{
-			ifCurrentLesson = MyProvider.calendar.get(Calendar.DAY_OF_YEAR)== Calendar.getInstance().get(Calendar.DAY_OF_YEAR) &&
-					compareDate(currentDate,listLessons.get(position).getDateOriginal())>0;
-		}
 		if(ifCurrentLesson)
 		{
 			rView.setInt(R.id.tvDate, "setBackgroundColor", 
@@ -170,7 +152,6 @@ public class MyFactory implements RemoteViewsFactory {
 	public void onDataSetChanged() {
 
 		int week = MyProvider.calendar.get(Calendar.WEEK_OF_YEAR);// четный - первая
-		Log.d("week", String.valueOf(week));
 		if (week % 2 == 0)
 			week = 1;
 		else

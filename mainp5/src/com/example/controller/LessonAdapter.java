@@ -7,20 +7,16 @@ import java.util.List;
 
 import com.example.p5.R;
 import com.example.view.AddDialog;
-import com.example.view.MainActivityNavig;
 import com.example.view.fragments.FragmentOne;
 import com.example.xml.LessonData;
 import com.example.xml.XMLSerialize;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

@@ -7,21 +7,18 @@ import java.util.List;
 import com.example.controller.Lesson;
 import com.example.controller.LessonAdapter;
 import com.example.p5.R;
-import com.example.view.AddDialog;
 import com.example.xml.XMLSerialize;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 public class FragmentOne extends Fragment {
 	Spinner spinner;
@@ -103,13 +100,4 @@ public class FragmentOne extends Fragment {
 		}
 	}
 	
-	public void onClick(View v) {
-		/*switch (v.getId()) {
-		case R.id.buttonAdd:
-			AddDialog dlg1 = new AddDialog();
-			dlg1.show(getFragmentManager(), "228");
-			dlg1.SetActivity(this);
-			break;
-		}*/
-	}
 }
