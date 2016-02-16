@@ -1,6 +1,7 @@
 package com.example.view.fragments;
 
 import java.io.File;
+import java.util.List;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.p5.R;
+import com.example.parser.*;
 
 public class FragmentTwo extends Fragment {
 
@@ -38,9 +40,16 @@ public class FragmentTwo extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				File file = new File(Environment.getExternalStorageDirectory().getPath() + "/Download/4kurs2016.xls");
-				
-				outp.setText("OLOLO");
+				//File file = new File(Environment.getExternalStorageDirectory().getPath() + "/Download/4kurs2016.xls");
+				List<CellLesson> list = null;
+				try {
+					MainParser test = new MainParser(Environment.getExternalStorageDirectory().getPath() + "/Download/rapis-4k_man.xls");
+					list = test.getContentByGroup(0, "107212");
+					
+				}
+				catch (Exception e) {}
+				if (list != null)
+					outp.setText((list.get(0).getLesson().toString()));
 			}
 		};
 		loadButton.setOnClickListener(oclLoadBtn);
