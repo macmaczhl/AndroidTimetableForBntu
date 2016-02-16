@@ -66,7 +66,7 @@ public class AddDialog extends DialogFragment implements
 		adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner3.setAdapter(adapter3);
 		try {
-			lessonData = XMLSerialize.read();
+			lessonData = XMLSerialize.read(act.getActivity());
 			Log.d("issss", "???");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -131,7 +131,7 @@ public class AddDialog extends DialogFragment implements
 				lessonData.list.add(lesson);
 			}
 			Collections.sort(lessonData.list);
-			XMLSerialize.write(lessonData);
+			XMLSerialize.write(lessonData,act.getActivity());
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

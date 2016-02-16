@@ -79,7 +79,7 @@ public class FragmentOne extends Fragment {
 		try {
 			List<Lesson> allLessons = new ArrayList<Lesson>();
 			List<Lesson> currentList = new ArrayList<Lesson>();
-			allLessons = XMLSerialize.read().list;
+			allLessons = XMLSerialize.read(getActivity()).list;
 
 			for (Lesson obj : allLessons) {
 				if (obj.getDay() == selected)
