@@ -158,7 +158,7 @@ public class MyFactory implements RemoteViewsFactory {
 			week = 2;
 
 		try {
-			allLessons = XMLSerialize.read().list;
+			allLessons = XMLSerialize.read(context).list;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

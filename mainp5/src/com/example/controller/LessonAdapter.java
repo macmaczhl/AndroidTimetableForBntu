@@ -132,7 +132,7 @@ public class LessonAdapter extends BaseAdapter {
 				Lesson temp = new Lesson();
 				temp.FillLesson(date, subj, corpus, room, selected, week, 0);
 				try {
-					allLessons = XMLSerialize.read().list;
+					allLessons = XMLSerialize.read(act.getActivity()).list;
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -167,7 +167,7 @@ public class LessonAdapter extends BaseAdapter {
 						temp.FillLesson(date, subj, corpus, room, selected,
 								week, 0);
 						try {
-							allLessons = XMLSerialize.read().list;
+							allLessons = XMLSerialize.read(act.getActivity()).list;
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -187,7 +187,7 @@ public class LessonAdapter extends BaseAdapter {
 						lessonData.list = allLessons;
 						try {
 							Collections.sort(lessonData.list);
-							XMLSerialize.write(lessonData);
+							XMLSerialize.write(lessonData, act.getActivity());
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

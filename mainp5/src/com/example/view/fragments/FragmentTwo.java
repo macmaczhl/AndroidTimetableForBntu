@@ -55,10 +55,10 @@ public class FragmentTwo extends Fragment {
 			public void onClick(View v) {
 				List<CellLesson> list = null;
 				try {
-					List<com.example.controller.Lesson> lessonList = manager.getLessons(lvSelectedFile, lvSelectedSheet, etGroup.getText().toString(), 1);
+					List<com.example.controller.Lesson> lessonList = manager.getLessons(lvSelectedFile, lvSelectedSheet, etGroup.getText().toString(), 2);
 					LessonData data = new LessonData();
 					data.list = lessonList;
-					XMLSerialize.write(data);
+					XMLSerialize.write(data, getActivity());
 					outp.setText(String.valueOf(lvSelectedSheet));////////////////////
 					
 				} catch (Exception e) {
