@@ -3,6 +3,8 @@ package com.example.parser;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.poi.ss.formula.IStabilityClassifier;
+
 import android.util.Log;
 
 public class LessonConverterFromParser {
@@ -32,120 +34,121 @@ public class LessonConverterFromParser {
 				switch (cellLesson.getTypeOfCell()) {
 				case 0:
 					Lesson les0 = cellLesson.getLesson();
-					com.example.controller.Lesson fillLesson0 = new com.example.controller.Lesson();
-					convertLesson(les0, fillLesson0, 0, 0);
-					convertedList.add(fillLesson0);
+					fillLesson = new com.example.controller.Lesson();
+					convertLesson(les0, fillLesson, 0, 0);
+					//Log.d("OOO", fillLesson.toString());
+					convertedList.add(fillLesson);
 					break;
 				case 1:
 					Lesson [] les1 = cellLesson.getDoubleLesson();
-					com.example.controller.Lesson fillLesson1 = new com.example.controller.Lesson();
-					convertLesson(les1[0], fillLesson1, 1, 0);
-					convertedList.add(fillLesson1);
+					fillLesson = new com.example.controller.Lesson();
+					convertLesson(les1[0], fillLesson, 1, 0);
+					convertedList.add(fillLesson);
 					
-					com.example.controller.Lesson fillLesson12 = new com.example.controller.Lesson();
-					convertLesson(les1[1], fillLesson12, 2, 0);
-					convertedList.add(fillLesson12);
+					fillLesson = new com.example.controller.Lesson();
+					convertLesson(les1[1], fillLesson, 2, 0);
+					convertedList.add(fillLesson);
 					break;
 				case 2:
 					Lesson [] les2 = cellLesson.getDoubleLesson();
 					if (subgroup == 1) {
-						com.example.controller.Lesson fillLesson2 = new com.example.controller.Lesson();
-						convertLesson(les2[0], fillLesson2, 0, 0);
-						convertedList.add(fillLesson2);
+						fillLesson = new com.example.controller.Lesson();
+						convertLesson(les2[0], fillLesson, 0, 0);
+						convertedList.add(fillLesson);
 					}
 					else {
-						com.example.controller.Lesson fillLesson22 = new com.example.controller.Lesson();
-						convertLesson(les2[1], fillLesson22, 0, 0);
-						convertedList.add(fillLesson22);
+						fillLesson = new com.example.controller.Lesson();
+						convertLesson(les2[1], fillLesson, 0, 0);
+						convertedList.add(fillLesson);
 					}
 					break;
 				case 3:
 					Lesson [] les3 = cellLesson.getTripleLesson();
-					com.example.controller.Lesson fillLesson31 = new com.example.controller.Lesson();
-					convertLesson(les3[0], fillLesson31, 1, 0);
-					convertedList.add(fillLesson31);
+					fillLesson = new com.example.controller.Lesson();
+					convertLesson(les3[0], fillLesson, 1, 0);
+					convertedList.add(fillLesson);
 					
 					if (subgroup == 1) {
-						com.example.controller.Lesson fillLesson32 = new com.example.controller.Lesson();
-						convertLesson(les3[1], fillLesson32, 2, 0);
-						convertedList.add(fillLesson32);
+						fillLesson = new com.example.controller.Lesson();
+						convertLesson(les3[1], fillLesson, 2, 0);
+						convertedList.add(fillLesson);
 					}
 					else {
-						com.example.controller.Lesson fillLesson33 = new com.example.controller.Lesson();
-						convertLesson(les3[2], fillLesson33, 2, 0);
-						convertedList.add(fillLesson33);
+						fillLesson = new com.example.controller.Lesson();
+						convertLesson(les3[2], fillLesson, 2, 0);
+						convertedList.add(fillLesson);
 					}
 					break;
 				case 4:
 					Lesson [] les4 = cellLesson.getTripleLesson();
-					com.example.controller.Lesson fillLesson41 = new com.example.controller.Lesson();
+					fillLesson = new com.example.controller.Lesson();
 					if (subgroup == 1) {
-						convertLesson(les4[0], fillLesson41, 1, 0);
-						convertedList.add(fillLesson41);
+						convertLesson(les4[0], fillLesson, 1, 0);
+						convertedList.add(fillLesson);
 					}
 					else {
-						com.example.controller.Lesson fillLesson42 = new com.example.controller.Lesson();
-						convertLesson(les4[1], fillLesson42, 1, 0);
-						convertedList.add(fillLesson42);
+						fillLesson = new com.example.controller.Lesson();
+						convertLesson(les4[1], fillLesson, 1, 0);
+						convertedList.add(fillLesson);
 					}
 					
-					com.example.controller.Lesson fillLesson43 = new com.example.controller.Lesson();
-					convertLesson(les4[2], fillLesson43, 2, 0);
-					convertedList.add(fillLesson43);
+					fillLesson = new com.example.controller.Lesson();
+					convertLesson(les4[2], fillLesson, 2, 0);
+					convertedList.add(fillLesson);
 					break;
 				case 5:
 					Lesson [] les5 = cellLesson.getFourLesson();
-					com.example.controller.Lesson fillLesson51 = new com.example.controller.Lesson();
+					fillLesson = new com.example.controller.Lesson();
 					if (subgroup == 1) {
-						convertLesson(les5[0], fillLesson51, 1, 0);
-						convertedList.add(fillLesson51);
+						convertLesson(les5[0], fillLesson, 1, 0);
+						convertedList.add(fillLesson);
 						
-						com.example.controller.Lesson fillLesson52 = new com.example.controller.Lesson();
-						convertLesson(les5[2], fillLesson52, 2, 0);
-						convertedList.add(fillLesson52);
+						fillLesson = new com.example.controller.Lesson();
+						convertLesson(les5[2], fillLesson, 2, 0);
+						convertedList.add(fillLesson);
 					}
 					else {
-						com.example.controller.Lesson fillLesson53 = new com.example.controller.Lesson();
-						convertLesson(les5[1], fillLesson53, 1, 0);
-						convertedList.add(fillLesson53);
+						fillLesson = new com.example.controller.Lesson();
+						convertLesson(les5[1], fillLesson, 1, 0);
+						convertedList.add(fillLesson);
 						
-						com.example.controller.Lesson fillLesson54 = new com.example.controller.Lesson();
-						convertLesson(les5[3], fillLesson54, 2, 0);
-						convertedList.add(fillLesson54);
+						fillLesson = new com.example.controller.Lesson();
+						convertLesson(les5[3], fillLesson, 2, 0);
+						convertedList.add(fillLesson);
 					}
 					break;
 				case 6:
 					Lesson [] les6 = cellLesson.getTripleLesson();
-					com.example.controller.Lesson fillLesson61 = new com.example.controller.Lesson();
+					fillLesson = new com.example.controller.Lesson();
 					if (subgroup == 1) {
-						convertLesson(les6[0], fillLesson61, 0, 0);
-						convertedList.add(fillLesson61);
+						convertLesson(les6[0], fillLesson, 0, 0);
+						convertedList.add(fillLesson);
 					}
 					else {
-						com.example.controller.Lesson fillLesson62 = new com.example.controller.Lesson();
-						convertLesson(les6[1], fillLesson62, 1, 0);
-						convertedList.add(fillLesson62);
+						fillLesson = new com.example.controller.Lesson();
+						convertLesson(les6[1], fillLesson, 1, 0);
+						convertedList.add(fillLesson);
 						
-						com.example.controller.Lesson fillLesson63 = new com.example.controller.Lesson();
-						convertLesson(les6[2], fillLesson63, 2, 0);
-						convertedList.add(fillLesson63);
+						fillLesson = new com.example.controller.Lesson();
+						convertLesson(les6[2], fillLesson, 2, 0);
+						convertedList.add(fillLesson);
 					}
 					break;
 				case 7:
 					Lesson [] les7 = cellLesson.getTripleLesson();
-					com.example.controller.Lesson fillLesson71 = new com.example.controller.Lesson();
+					fillLesson = new com.example.controller.Lesson();
 					if (subgroup == 1) {
-						convertLesson(les7[0], fillLesson71, 1, 0);
-						convertedList.add(fillLesson71);
+						convertLesson(les7[0], fillLesson, 1, 0);
+						convertedList.add(fillLesson);
 						
-						com.example.controller.Lesson fillLesson72 = new com.example.controller.Lesson();
-						convertLesson(les7[1], fillLesson72, 2, 0);
-						convertedList.add(fillLesson72);
+						fillLesson = new com.example.controller.Lesson();
+						convertLesson(les7[1], fillLesson, 2, 0);
+						convertedList.add(fillLesson);
 					}
 					else {						
-						com.example.controller.Lesson fillLesson73 = new com.example.controller.Lesson();
-						convertLesson(les7[2], fillLesson73, 0, 0);
-						convertedList.add(fillLesson73);
+						fillLesson = new com.example.controller.Lesson();
+						convertLesson(les7[2], fillLesson, 0, 0);
+						convertedList.add(fillLesson);
 					}
 					break;
 				}
@@ -159,6 +162,17 @@ public class LessonConverterFromParser {
 	}
 	
 	private void convertLesson(Lesson from, com.example.controller.Lesson to, int week, int type) {
-		to.FillLesson(convertTime(from.getTime()), from.getSubject(), from.getHousing(), from.getClassroom(), from.getTime().getDay(), week, type);
+		String time = convertTime(from.getTime());
+		String subject = from.getSubject();
+		if (subject == null)
+			subject = " ";
+		String housing = from.getHousing();
+		if (housing == null)
+			housing = " ";
+		String classroom = from.getClassroom();
+		if (classroom == null)
+			classroom = " ";
+		int day = from.getTime().getDay();
+		to.FillLesson(time, subject, housing, classroom, day, week, type);
 	}
 }

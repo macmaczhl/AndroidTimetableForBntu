@@ -1,5 +1,6 @@
 package com.example.view.fragments;
 
+import java.util.Collections;
 import java.util.List;
 
 import android.app.Fragment;
@@ -53,19 +54,20 @@ public class FragmentTwo extends Fragment {
 		OnClickListener oclLoadBtn = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				List<CellLesson> list = null;
 				try {
-					List<com.example.controller.Lesson> lessonList = manager.getLessons(lvSelectedFile, lvSelectedSheet, etGroup.getText().toString(), 2);
+					List<com.example.controller.Lesson> lessonList = manager.getLessons(lvSelectedFile, lvSelectedSheet, etGroup.getText().toString(), 1);
+					for (com.example.controller.Lesson les : lessonList) {
+						Log.d("OOO", les.toString());
+					}
 					LessonData data = new LessonData();
 					data.list = lessonList;
+					Collections.sort(data.list);
 					XMLSerialize.write(data, getActivity());
-					outp.setText(String.valueOf(lvSelectedSheet));////////////////////
-					
+					outp.setText(String.valueOf(lvSelectedSheet));
 				} catch (Exception e) {
 					e.printStackTrace();
+					outp.setText("Not");
 				}
-				if (list != null)
-					outp.setText((list.get(0).getLesson().toString()));
 			}
 		};
 		loadButton.setOnClickListener(oclLoadBtn);
