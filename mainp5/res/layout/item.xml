@@ -10,7 +10,7 @@
 		    android:layout_width="wrap_content"
 		    android:layout_height="match_parent"
 		    android:textSize="14sp"
-		    android:width="50dp" >
+		    android:width="60dp" >
 
 		</TextView>
 
@@ -19,7 +19,7 @@
 		    android:layout_width="wrap_content"
 		    android:layout_height="match_parent"
 		    android:textSize="14sp"
-		    android:width="175dp" >
+		    android:width="190dp" >
 
 		</TextView>
 
@@ -36,7 +36,7 @@
 		    android:layout_width="match_parent"
 		    android:layout_height="match_parent"
 		    android:textSize="14sp"
-		    android:width="30dp" >
+		    android:width="45dp" >
 
 		</TextView>
 		

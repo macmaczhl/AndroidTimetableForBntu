@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.poi.ss.formula.IStabilityClassifier;
 
+import com.example.view.AddDialog;
+
 import android.util.Log;
 
 public class LessonConverterFromParser {
@@ -29,7 +31,7 @@ public class LessonConverterFromParser {
 		for (CellLesson cellLesson : listCellLessons) {
 			if (!(cellLesson.isSorted())) {
 				Lesson bufLess = cellLesson.getLesson();
-				fillLesson.FillLesson(convertTime(bufLess.getTime()), bufLess.getSubject(), "", "", bufLess.getTime().getDay(), 0, 0);
+				fillLesson.fillLesson(convertTime(bufLess.getTime()), bufLess.getSubject(), "", "", bufLess.getTime().getDay(), 0,0, AddDialog.defaultDuration);
 			}
 			else {
 				switch (cellLesson.getTypeOfCell()) {
@@ -216,6 +218,6 @@ public class LessonConverterFromParser {
 		if (classroom == null)
 			classroom = " ";
 		int day = from.getTime().getDay();
-		to.FillLesson(time, subject, housing, classroom, day, week, type);
+		to.fillLesson(time, subject, housing, classroom, day, week, type,AddDialog.defaultDuration);
 	}
 }

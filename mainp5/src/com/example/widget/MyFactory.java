@@ -66,7 +66,12 @@ public class MyFactory implements RemoteViewsFactory {
 		RemoteViews rView = new RemoteViews(context.getPackageName(),
 				R.layout.item);
 
-		rView.setTextViewText(R.id.tvDate, listLessons.get(position).getDate());
+		try {
+			rView.setTextViewText(R.id.tvDate, listLessons.get(position).getDate() + "\n\t" + listLessons.get(position).getEndOfLessonString());
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		rView.setTextViewText(R.id.tvCorpus, listLessons.get(position)
 				.getCorpus());
 		rView.setTextViewText(R.id.tvRoom, listLessons.get(position)
@@ -81,7 +86,8 @@ public class MyFactory implements RemoteViewsFactory {
 					&& Lesson.compareDate(currentDate, listLessons
 							.get(position).getDateOriginal()) > 0
 					&& Lesson.compareDate(currentDate,
-							Lesson.AddDate(dateTemp, 1, 35)) < 0;
+							listLessons
+							.get(position).getEndOfLesson()) < 0;
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -14,6 +14,7 @@ import org.simpleframework.xml.Root;
 @Root(name = "lesson")
 public class Lesson implements Comparable<Lesson> {
 	private Date time;
+	private int duration;
 	private String subject;
 	private String corpus;
 	private String classroom;
@@ -22,8 +23,8 @@ public class Lesson implements Comparable<Lesson> {
 	private int week;
 
 	@SuppressLint("SimpleDateFormat")
-	public void FillLesson(String time, String subjname, String corpus,
-			String classroom, int day, int week, int type) {
+	public void fillLesson(String time, String subjname, String corpus,
+			String classroom, int day, int week, int type,String duration) {
 		DateFormat format = new SimpleDateFormat("HH:mm");
 		Date timetemp = new Date();
 		try {
@@ -39,6 +40,7 @@ public class Lesson implements Comparable<Lesson> {
 		this.week = week;
 		this.corpus = corpus;
 		this.type = type;
+		this.duration = Integer.valueOf(duration);
 	}
 
 	@SuppressLint("SimpleDateFormat")
@@ -69,6 +71,19 @@ public class Lesson implements Comparable<Lesson> {
 	public void setDay(int day) {
 		this.day = day;
 	}
+	
+	
+	@Element(name = "duration")
+	public int getDuration() {
+		return duration;
+	}
+
+	@Element(name = "duration")
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+	
+	
 
 	@SuppressLint("SimpleDateFormat")
 	@Element(name = "date")
@@ -173,8 +188,21 @@ public class Lesson implements Comparable<Lesson> {
 		}
 		return 0;
 	}
+	
+	public Date getEndOfLesson() throws ParseException
+	{
+		Date timeOfEnd = time;
+		return addDate(timeOfEnd,duration);
+	}
+	
+	public String getEndOfLessonString() throws ParseException
+	{
+		DateFormat format = new SimpleDateFormat("HH:mm");
+		Date timeOfEnd = time;
+		return format.format(addDate(timeOfEnd,duration));
+	}
 
-	static public Date AddDate(Date date, int hours, int mins)
+	static private Date addDate(Date date, int mins)
 			throws ParseException {
 		int hour;
 		int min;
@@ -183,9 +211,8 @@ public class Lesson implements Comparable<Lesson> {
 		format = new SimpleDateFormat("mm");
 		min = Integer.valueOf(format.format(date));
 
-		hour += hours;
 		min += mins;
-		if (min >= 60) {
+		while (min >= 60) {
 			min -= 60;
 			hour++;
 		}

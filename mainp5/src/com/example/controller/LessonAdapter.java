@@ -130,7 +130,7 @@ public class LessonAdapter extends BaseAdapter {
 				String room = item.txtRoom.getText().toString();
 				int week = Integer.valueOf(item.txtWeek.getText().toString());
 				Lesson temp = new Lesson();
-				temp.FillLesson(date, subj, corpus, room, selected, week, 0);
+				temp.fillLesson(date, subj, corpus, room, selected, week, 0,"0");
 				try {
 					allLessons = XMLSerialize.read(act.getActivity()).list;
 				} catch (Exception e) {
@@ -164,8 +164,8 @@ public class LessonAdapter extends BaseAdapter {
 						int week = Integer.valueOf(item.txtWeek.getText()
 								.toString());
 						Lesson temp = new Lesson();
-						temp.FillLesson(date, subj, corpus, room, selected,
-								week, 0);
+						temp.fillLesson(date, subj, corpus, room, selected,
+								week, 0,"0");
 						try {
 							allLessons = XMLSerialize.read(act.getActivity()).list;
 						} catch (Exception e) {

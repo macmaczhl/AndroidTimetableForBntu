@@ -21,6 +21,7 @@ import android.widget.Spinner;
 
 public class AddDialog extends DialogFragment implements
 		DialogInterface.OnClickListener {
+	public final static String defaultDuration = "95";
 	private View form = null;
 	String title;
 	Spinner spinner2;
@@ -51,7 +52,6 @@ public class AddDialog extends DialogFragment implements
 		form = getActivity().getLayoutInflater().inflate(R.layout.dialogadd,
 				null);
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
 		spinner2 = (Spinner) form.findViewById(R.id.spinner3);
 		ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(
 				getActivity(), R.array.week,
@@ -65,6 +65,9 @@ public class AddDialog extends DialogFragment implements
 				android.R.layout.simple_spinner_item);
 		adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner3.setAdapter(adapter3);
+
+		EditText durationBox = (EditText) form.findViewById(R.id.item_duration);
+		durationBox.setText(defaultDuration);
 		try {
 			lessonData = XMLSerialize.read(act.getActivity());
 			Log.d("issss", "???");
@@ -89,6 +92,7 @@ public class AddDialog extends DialogFragment implements
 			subjectBox.setText(lessonData.list.get(posEdit).getSubject());
 			classroomBox.setText(lessonData.list.get(posEdit).getClassRoom());
 			corpusBox.setText(lessonData.list.get(posEdit).getCorpus());
+			durationBox.setText(String.valueOf(lessonData.list.get(posEdit).getDuration()));
 		}
 
 		return (builder.setTitle(title).setView(form)
@@ -105,11 +109,13 @@ public class AddDialog extends DialogFragment implements
 		EditText corpusBox = (EditText) form.findViewById(R.id.item_corpus);
 		EditText classroomBox = (EditText) form
 				.findViewById(R.id.item_classroom);
-		String time = null, subject = null, corpus = null, classroom = null;
+		EditText durationBox = (EditText) form.findViewById(R.id.item_duration);
+		String time = null, subject = null, corpus = null, classroom = null,duration = null;
 		time = timeBox.getText().toString();
 		subject = subjectBox.getText().toString();
 		corpus = corpusBox.getText().toString();
 		classroom = classroomBox.getText().toString();
+		duration = durationBox.getText().toString();
 		int dayOfWeek = FragmentOne.selected;
 		int week = spinner2.getSelectedItemPosition();
 		int type = spinner3.getSelectedItemPosition();
@@ -123,8 +129,8 @@ public class AddDialog extends DialogFragment implements
 
 		try {
 			Lesson lesson = new Lesson();
-			lesson.FillLesson(time, subject, corpus, classroom, dayOfWeek,
-					week, type);
+			lesson.fillLesson(time, subject, corpus, classroom, dayOfWeek,
+					week, type,duration);
 			if (isEdit) {
 				lessonData.list.set(posEdit, lesson);
 			} else {
