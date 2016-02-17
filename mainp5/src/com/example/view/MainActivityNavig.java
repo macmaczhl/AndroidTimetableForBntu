@@ -20,7 +20,6 @@ import android.view.ViewGroup;
 public class MainActivityNavig extends Activity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
 
-
 	FragmentOne fragment1 = null;
 	FragmentTwo fragment2 = null;
 	FragmentThree fragment3 = null;
@@ -65,13 +64,13 @@ public class MainActivityNavig extends Activity implements
 			break;
 		case 1:
 			if (fragment2 == null)
-			fragment2 = new FragmentTwo();
+				fragment2 = new FragmentTwo();
 			fragmentManager.beginTransaction()
 					.replace(R.id.container, fragment2).commit();
 			break;
 		default:
 			if (fragment3 == null)
-			fragment3 = new FragmentThree();
+				fragment3 = new FragmentThree();
 			fragmentManager.beginTransaction()
 					.replace(R.id.container, fragment3).commit();
 			break;

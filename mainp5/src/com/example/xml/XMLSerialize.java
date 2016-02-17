@@ -15,12 +15,13 @@ public class XMLSerialize {
 	static File file;
 	static String filename = "raspisanie.xml";
 
-	public static void write(LessonData lessonData,Context context) throws Exception {
+	public static void write(LessonData lessonData, Context context)
+			throws Exception {
 		Serializer serializer = new Persister();
-		//file = new File("/mnt/sdcard2/test2.xml");
-		
-		
-		FileOutputStream fos = context.openFileOutput(filename, Context.MODE_WORLD_WRITEABLE);
+		// file = new File("/mnt/sdcard2/test2.xml");
+
+		FileOutputStream fos = context.openFileOutput(filename,
+				Context.MODE_WORLD_WRITEABLE);
 		OutputStreamWriter os = new OutputStreamWriter(fos);
 		serializer.write(lessonData, os);
 		os.close();
@@ -30,19 +31,16 @@ public class XMLSerialize {
 
 	public static LessonData read(Context context) throws Exception {
 		Serializer serializer = new Persister();
-		//file = new File("/mnt/sdcard2/test2.xml");
-		//LessonData lessonData = serializer.read(LessonData.class, file);
-		
-		
+		// file = new File("/mnt/sdcard2/test2.xml");
+		// LessonData lessonData = serializer.read(LessonData.class, file);
 
 		FileInputStream fis = context.openFileInput(filename);
 		InputStreamReader is = new InputStreamReader(fis);
 		LessonData lessonData = serializer.read(LessonData.class, is);
-		
+
 		is.close();
 		fis.close();
-		
-		
+
 		return lessonData;
 	}
 }

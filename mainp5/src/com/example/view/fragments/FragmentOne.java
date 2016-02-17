@@ -23,27 +23,24 @@ import android.widget.Spinner;
 public class FragmentOne extends Fragment {
 	Spinner spinner;
 	public static int selected;
-	
+
 	View bufView;
-	
-	public FragmentOne()
-	{
+
+	public FragmentOne() {
 	}
-	
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-	
-		View rootView = inflater.inflate(R.layout.fragment1, container,
-				false);
-		
+
+		View rootView = inflater.inflate(R.layout.fragment1, container, false);
+
 		return rootView;
 	}
-	
+
 	@Override
 	public void onViewCreated(View viewMain, Bundle savedInstanceState) {
-		//////////////////
+		// ////////////////
 		bufView = viewMain;
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
 				android.R.layout.simple_spinner_item, getResources()
@@ -70,9 +67,9 @@ public class FragmentOne extends Fragment {
 			public void onNothingSelected(AdapterView<?> arg0) {
 			}
 		});
-		///////////////////
+		// /////////////////
 	}
-	
+
 	public void ShowList() {
 
 		ListView mylist = (ListView) bufView.findViewById(R.id.gridView);
@@ -85,7 +82,8 @@ public class FragmentOne extends Fragment {
 				if (obj.getDay() == selected)
 					currentList.add(obj);
 			}
-			LessonAdapter adapter = new LessonAdapter(getActivity(), currentList);
+			LessonAdapter adapter = new LessonAdapter(getActivity(),
+					currentList);
 			adapter.SetActivity(this);
 			if (allLessons.isEmpty())
 				mylist.setAdapter(null);
@@ -99,5 +97,5 @@ public class FragmentOne extends Fragment {
 			mylist.setAdapter(null);
 		}
 	}
-	
+
 }

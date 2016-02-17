@@ -76,7 +76,7 @@ public class Lesson implements Comparable<Lesson> {
 		DateFormat format = new SimpleDateFormat("HH:mm");
 		return format.format(time);
 	}
-	
+
 	public Date getDateOriginal() {
 		return time;
 	}
@@ -151,50 +151,54 @@ public class Lesson implements Comparable<Lesson> {
 	public int compareTo(Lesson arg0) {
 		return this.time.compareTo(arg0.time);
 	}
-	
-	static public int compareDate(Date arg1,Date arg2)
-	{
+
+	static public int compareDate(Date arg1, Date arg2) {
 		DateFormat format = new SimpleDateFormat("HH");
-		if(Integer.valueOf(format.format(arg1)) < Integer.valueOf(format.format(arg2)))
-			return -1;			
-		if(Integer.valueOf(format.format(arg1)) > Integer.valueOf(format.format(arg2)))
+		if (Integer.valueOf(format.format(arg1)) < Integer.valueOf(format
+				.format(arg2)))
+			return -1;
+		if (Integer.valueOf(format.format(arg1)) > Integer.valueOf(format
+				.format(arg2)))
 			return 1;
-		if(Integer.valueOf(format.format(arg1)) == Integer.valueOf(format.format(arg2)))
-		{
+		if (Integer.valueOf(format.format(arg1)) == Integer.valueOf(format
+				.format(arg2))) {
 			format = new SimpleDateFormat("mm");
-			if(Integer.valueOf(format.format(arg1)) < Integer.valueOf(format.format(arg2)))
-				return -1;			
-			if(Integer.valueOf(format.format(arg1)) > Integer.valueOf(format.format(arg2)))
+			if (Integer.valueOf(format.format(arg1)) < Integer.valueOf(format
+					.format(arg2)))
+				return -1;
+			if (Integer.valueOf(format.format(arg1)) > Integer.valueOf(format
+					.format(arg2)))
 				return 1;
-			return 0;			
+			return 0;
 		}
-		return 0;			
+		return 0;
 	}
-	
-	static public Date AddDate(Date date,int hours,int mins) throws ParseException
-	{
+
+	static public Date AddDate(Date date, int hours, int mins)
+			throws ParseException {
 		int hour;
 		int min;
 		DateFormat format = new SimpleDateFormat("HH");
 		hour = Integer.valueOf(format.format(date));
 		format = new SimpleDateFormat("mm");
 		min = Integer.valueOf(format.format(date));
-		
-		hour+=hours;
-		min+=mins;
-		if(min>=60){
-			min-=60;
+
+		hour += hours;
+		min += mins;
+		if (min >= 60) {
+			min -= 60;
 			hour++;
 		}
-			
+
 		format = new SimpleDateFormat("HH:mm");
-		if(min>=10)
-			date = format.parse(String.valueOf(hour)+":"+String.valueOf(min));
+		if (min >= 10)
+			date = format.parse(String.valueOf(hour) + ":"
+					+ String.valueOf(min));
 		else
-			date = format.parse(String.valueOf(hour)+":0"+String.valueOf(min));		
+			date = format.parse(String.valueOf(hour) + ":0"
+					+ String.valueOf(min));
 		return date;
-		
-		
+
 	}
 
 }

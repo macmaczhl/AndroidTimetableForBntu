@@ -16,13 +16,12 @@ import android.widget.ArrayAdapter;
 public class ListViewExcelFilesManager {
 	Activity activity;
 	MainParser parser = null;
-	
+
 	String fileNames[] = null;
 	ArrayAdapter<String> adapterFiles;
-	
+
 	ArrayAdapter<String> adapterSheets = null;
-	String fileSheets [] = null;	
-	
+	String fileSheets[] = null;
 
 	public ListViewExcelFilesManager(Activity act) {
 		activity = act;
@@ -37,7 +36,8 @@ public class ListViewExcelFilesManager {
 
 	// Возвращает массив имен файлов в папке Download
 	private String[] getExcelFilesFromDownloadFolder() {
-		File directory = new File(Environment.getExternalStorageDirectory().getPath() + "/Download");
+		File directory = new File(Environment.getExternalStorageDirectory()
+				.getPath() + "/Download");
 		File[] files = directory.listFiles();
 		if (files == null)
 			return new String[] { "No Excel files" };
@@ -76,25 +76,28 @@ public class ListViewExcelFilesManager {
 	public String getFileName(int pos) {
 		return fileNames[pos];
 	}
-	
+
 	// Формирует массив из листов Excel файла
 	public void formLists(int filePos) {
 		try {
-			parser = new MainParser(Environment.getExternalStorageDirectory().getPath() + "/Download/" + getFileName(filePos));
+			parser = new MainParser(Environment.getExternalStorageDirectory()
+					.getPath() + "/Download/" + getFileName(filePos));
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		catch(Exception e)
-		{ e.printStackTrace(); }
 		fileSheets = parser.getSheetNames();
 	}
-	
+
 	public ArrayAdapter<String> getAdapterSheets() {
 		adapterSheets = new ArrayAdapter<String>(activity,
 				android.R.layout.simple_list_item_1, fileSheets);
 		return adapterSheets;
 	}
-	
-	public List<com.example.controller.Lesson> getLessons(int selectedFile, int selectedSheet, String group, int subgroup) {
-		LessonConverterFromParser converter = new LessonConverterFromParser(parser, selectedSheet, group, subgroup);
+
+	public List<com.example.controller.Lesson> getLessons(int selectedFile,
+			int selectedSheet, String group, int subgroup) {
+		LessonConverterFromParser converter = new LessonConverterFromParser(
+				parser, selectedSheet, group, subgroup);
 		return converter.getConvertedLessons();
 	}
 }

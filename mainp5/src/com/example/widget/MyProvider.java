@@ -25,13 +25,14 @@ public class MyProvider extends AppWidgetProvider {
 	int week;
 	SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
 	public static Calendar calendar = Calendar.getInstance();
-	//public static int dayOfTheWeek;
+
+	// public static int dayOfTheWeek;
 
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager,
 			int[] appWidgetIds) {
 		super.onUpdate(context, appWidgetManager, appWidgetIds);
-		//dayOfTheWeek = calendar.get(Calendar.DAY_OF_WEEK);
+		// dayOfTheWeek = calendar.get(Calendar.DAY_OF_WEEK);
 		for (int i : appWidgetIds) {
 			updateWidget(context, appWidgetManager, i);
 		}
@@ -41,8 +42,14 @@ public class MyProvider extends AppWidgetProvider {
 			int appWidgetId) {
 		RemoteViews rv = new RemoteViews(context.getPackageName(),
 				R.layout.widget);
-		rv.setTextViewText(R.id.tvUpdate, days[calendar.get(Calendar.DAY_OF_WEEK)]);
-		rv.setTextViewText(R.id.tvSelectedDate, String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)) + " " + calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()));
+		rv.setTextViewText(R.id.tvUpdate,
+				days[calendar.get(Calendar.DAY_OF_WEEK)]);
+		rv.setTextViewText(
+				R.id.tvSelectedDate,
+				String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))
+						+ " "
+						+ calendar.getDisplayName(Calendar.MONTH,
+								Calendar.LONG, Locale.getDefault()));
 
 		Intent updIntent = new Intent(context, MyProvider.class);
 		updIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
@@ -111,7 +118,7 @@ public class MyProvider extends AppWidgetProvider {
 			mAppWidgetId = mas[0];
 
 		if (intent.getAction().equalsIgnoreCase(ACTION_PREV)) {
-			//dayOfTheWeek--;
+			// dayOfTheWeek--;
 
 			calendar.add(Calendar.DAY_OF_MONTH, -1);
 
@@ -123,7 +130,7 @@ public class MyProvider extends AppWidgetProvider {
 		} else if (intent.getAction().equalsIgnoreCase(ACTION_CURRENT)) {
 
 			calendar = Calendar.getInstance();
-			//dayOfTheWeek = calendar.get(Calendar.DAY_OF_WEEK);
+			// dayOfTheWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
 		}
 		updateWidget(context, AppWidgetManager.getInstance(context),

@@ -27,17 +27,17 @@ import com.example.xml.XMLSerialize;
 
 public class FragmentTwo extends Fragment {
 
-	Button loadButton;	
+	Button loadButton;
 	TextView outp;
-	
+
 	ListView lvFiles;
 	int lvSelectedFile = -1;
-	
+
 	ListView lvSheets;
 	int lvSelectedSheet = -1;
-	
+
 	EditText etGroup;
-	
+
 	ListViewExcelFilesManager manager;
 
 	@Override
@@ -55,7 +55,9 @@ public class FragmentTwo extends Fragment {
 			@Override
 			public void onClick(View v) {
 				try {
-					List<com.example.controller.Lesson> lessonList = manager.getLessons(lvSelectedFile, lvSelectedSheet, etGroup.getText().toString(), 1);
+					List<com.example.controller.Lesson> lessonList = manager
+							.getLessons(lvSelectedFile, lvSelectedSheet,
+									etGroup.getText().toString(), 1);
 					for (com.example.controller.Lesson les : lessonList) {
 						Log.d("OOO", les.toString());
 					}
@@ -73,20 +75,19 @@ public class FragmentTwo extends Fragment {
 		loadButton.setOnClickListener(oclLoadBtn);
 
 		// Файлы
-		manager = new ListViewExcelFilesManager(
-				getActivity());
+		manager = new ListViewExcelFilesManager(getActivity());
 
 		lvFiles = (ListView) rootView.findViewById(R.id.listViewExelFiles);
 		lvSheets = (ListView) rootView.findViewById(R.id.listViewExcelSheets);
-		
+
 		lvFiles.setAdapter(manager.getAdapterFiles());
-		
+
 		lvFiles.setOnItemClickListener(new OnItemClickListener() {
 
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				lvSelectedFile = position;
-				
+
 				outp.setText("itemClick: position = " + position + ", id = "
 						+ id);
 				int count = parent.getCount();
@@ -94,13 +95,13 @@ public class FragmentTwo extends Fragment {
 					parent.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
 				}
 				view.setBackgroundColor(Color.GRAY);
-				
+
 				// Листы
-				manager.formLists(position);		
+				manager.formLists(position);
 				lvSheets.setAdapter(manager.getAdapterSheets());
 			}
 		});
-		
+
 		lvSheets.setOnItemClickListener(new OnItemClickListener() {
 
 			public void onItemClick(AdapterView<?> parent, View view,
@@ -108,7 +109,7 @@ public class FragmentTwo extends Fragment {
 				lvSelectedSheet = position;
 			}
 		});
-		
+
 		// ///////////////////////////
 		return rootView;
 	}

@@ -1,6 +1,5 @@
 package com.example.widget;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -60,63 +59,50 @@ public class MyFactory implements RemoteViewsFactory {
 	public RemoteViews getLoadingView() {
 		return null;
 	}
-	
-	
-	
-	
+
 	@Override
 	public RemoteViews getViewAt(int position) {
 
 		RemoteViews rView = new RemoteViews(context.getPackageName(),
 				R.layout.item);
-		
+
 		rView.setTextViewText(R.id.tvDate, listLessons.get(position).getDate());
 		rView.setTextViewText(R.id.tvCorpus, listLessons.get(position)
 				.getCorpus());
 		rView.setTextViewText(R.id.tvRoom, listLessons.get(position)
 				.getClassRoom());
 		Date currentDate = new Date();
-		
-		boolean ifCurrentLesson = false;
-			Date dateTemp  = listLessons.get(position).getDateOriginal();
-				try {
-					ifCurrentLesson = MyProvider.calendar.get(Calendar.DAY_OF_YEAR)== Calendar.getInstance().get(Calendar.DAY_OF_YEAR) &&
-							Lesson.compareDate(currentDate,listLessons.get(position).getDateOriginal())>0 &&
-							Lesson.compareDate(currentDate,Lesson.AddDate(dateTemp, 1, 35))<0;
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			
-			
 
-		if(ifCurrentLesson)
-		{
-			rView.setInt(R.id.tvDate, "setBackgroundColor", 
-			        android.graphics.Color.RED);
-			rView.setInt(R.id.tvSubj, "setBackgroundColor", 
-			        android.graphics.Color.RED);
-			rView.setInt(R.id.tvCorpus, "setBackgroundColor", 
-			        android.graphics.Color.RED);
-			rView.setInt(R.id.tvRoom, "setBackgroundColor", 
-			        android.graphics.Color.RED);
+		boolean ifCurrentLesson = false;
+		Date dateTemp = listLessons.get(position).getDateOriginal();
+		try {
+			ifCurrentLesson = MyProvider.calendar.get(Calendar.DAY_OF_YEAR) == Calendar
+					.getInstance().get(Calendar.DAY_OF_YEAR)
+					&& Lesson.compareDate(currentDate, listLessons
+							.get(position).getDateOriginal()) > 0
+					&& Lesson.compareDate(currentDate,
+							Lesson.AddDate(dateTemp, 1, 35)) < 0;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else
-		{
-			rView.setInt(R.id.tvDate, "setBackgroundColor", 
-			        Color.TRANSPARENT);
-			rView.setInt(R.id.tvSubj, "setBackgroundColor", 
-					Color.TRANSPARENT);
-			rView.setInt(R.id.tvCorpus, "setBackgroundColor", 
-					Color.TRANSPARENT);
-			rView.setInt(R.id.tvRoom, "setBackgroundColor", 
-					Color.TRANSPARENT);
+
+		if (ifCurrentLesson) {
+			rView.setInt(R.id.tvDate, "setBackgroundColor",
+					android.graphics.Color.RED);
+			rView.setInt(R.id.tvSubj, "setBackgroundColor",
+					android.graphics.Color.RED);
+			rView.setInt(R.id.tvCorpus, "setBackgroundColor",
+					android.graphics.Color.RED);
+			rView.setInt(R.id.tvRoom, "setBackgroundColor",
+					android.graphics.Color.RED);
+		} else {
+			rView.setInt(R.id.tvDate, "setBackgroundColor", Color.TRANSPARENT);
+			rView.setInt(R.id.tvSubj, "setBackgroundColor", Color.TRANSPARENT);
+			rView.setInt(R.id.tvCorpus, "setBackgroundColor", Color.TRANSPARENT);
+			rView.setInt(R.id.tvRoom, "setBackgroundColor", Color.TRANSPARENT);
 		}
-		
-		
-			
-		
-		
+
 		switch (listLessons.get(position).getType()) {
 		case 0:
 			SpannableString spanString = new SpannableString(listLessons.get(
@@ -151,7 +137,8 @@ public class MyFactory implements RemoteViewsFactory {
 	@Override
 	public void onDataSetChanged() {
 
-		int week = MyProvider.calendar.get(Calendar.WEEK_OF_YEAR);// четный - первая
+		int week = MyProvider.calendar.get(Calendar.WEEK_OF_YEAR);// четный -
+																	// первая
 		if (week % 2 == 0)
 			week = 1;
 		else
@@ -168,7 +155,8 @@ public class MyFactory implements RemoteViewsFactory {
 
 		try {
 			for (Lesson obj : allLessons) {
-				if (obj.getDay() == MyProvider.calendar.get(Calendar.DAY_OF_WEEK))
+				if (obj.getDay() == MyProvider.calendar
+						.get(Calendar.DAY_OF_WEEK))
 					if (obj.getWeek() == week || obj.getWeek() == 0)
 						listLessons.add(obj);
 			}
