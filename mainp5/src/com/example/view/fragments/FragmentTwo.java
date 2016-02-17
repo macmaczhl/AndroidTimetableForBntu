@@ -63,10 +63,10 @@ public class FragmentTwo extends Fragment {
 					data.list = lessonList;
 					Collections.sort(data.list);
 					XMLSerialize.write(data, getActivity());
-					outp.setText(String.valueOf(lvSelectedSheet));
+					outp.setText("Yes");
 				} catch (Exception e) {
 					e.printStackTrace();
-					outp.setText("Not");
+					outp.setText("No");
 				}
 			}
 		};

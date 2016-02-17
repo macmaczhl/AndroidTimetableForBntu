@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.usermodel.*;
 
+import android.util.Log;
+
 
 public class GroupParser {
 
@@ -475,12 +477,14 @@ public class GroupParser {
 	{
 		Lesson les = null;
 		String subject = readDataFromPos(row, col, countHor, countVert);
-		if (subject.isEmpty())
+		if (subject.isEmpty()) {
 			return null;
-		else
+		}
+		else {
 			subject = resetTime(time, subject);
 			les = new Lesson(time, subject, null, null);
 			setLessonHousCorp(les);
+		}
 		return les;
 	}
 	//Читает фсе строки в заданном диапазоне
@@ -501,19 +505,23 @@ public class GroupParser {
 					}
 					if (cell.getCellType() == Cell.CELL_TYPE_STRING)
 						str += cell.getStringCellValue();
-					/*else
-					{
-						if (cell.getCellType() == Cell.CELL_TYPE_BLANK)
-						{
-							System.out.println((row + i) + " " + (col + j));
-							Date data = cell.getDateCellValue();
-						}
-						else
-						System.out.println("Data has not string value");
-					}*/
 				}
 			}
 		}
+		
+		if (str.equals("")) {
+			for(CellRangeAddress range : rangeAdreses) {
+				if (row >= range.getFirstRow() && row <= range.getLastRow() && col >= range.getFirstColumn() && col <= range.getLastColumn()) {
+
+					cell = getCellFromPos(range.getFirstRow(), range.getFirstColumn());
+					if (cell != null) {
+						if (cell.getCellType() == Cell.CELL_TYPE_STRING)
+							str += cell.getStringCellValue();
+					}
+				}
+			}
+		}
+		
 		str = clearStringWithData(str);
 		return str;
 	}
