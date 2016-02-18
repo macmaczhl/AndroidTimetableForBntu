@@ -18,9 +18,7 @@ public class ListViewExcelFilesManager {
 	MainParser parser = null;
 
 	String fileNames[] = null;
-	ArrayAdapter<String> adapterFiles;
 
-	ArrayAdapter<String> adapterSheets = null;
 	String fileSheets[] = null;
 
 	public ListViewExcelFilesManager(Activity act) {
@@ -30,8 +28,6 @@ public class ListViewExcelFilesManager {
 
 	private void createAdapterFiles() {
 		this.fileNames = getExcelFilesFromDownloadFolder();
-		adapterFiles = new ArrayAdapter<String>(activity,
-				android.R.layout.simple_list_item_1, fileNames);
 	}
 
 	// Возвращает массив имен файлов в папке Download
@@ -69,12 +65,17 @@ public class ListViewExcelFilesManager {
 		return buf;
 	}
 
-	public ArrayAdapter<String> getAdapterFiles() {
-		return adapterFiles;
-	}
 
 	public String getFileName(int pos) {
 		return fileNames[pos];
+	}
+	
+	public String [] getFileNames() {
+		return fileNames;
+	}
+	
+	public String [] getSheetNames() {
+		return fileSheets;
 	}
 
 	// Формирует массив из листов Excel файла
@@ -86,12 +87,6 @@ public class ListViewExcelFilesManager {
 			e.printStackTrace();
 		}
 		fileSheets = parser.getSheetNames();
-	}
-
-	public ArrayAdapter<String> getAdapterSheets() {
-		adapterSheets = new ArrayAdapter<String>(activity,
-				android.R.layout.simple_list_item_1, fileSheets);
-		return adapterSheets;
 	}
 
 	public List<com.example.controller.Lesson> getLessons(int selectedFile,

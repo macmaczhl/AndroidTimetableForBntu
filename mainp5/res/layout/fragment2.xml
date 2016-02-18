@@ -4,53 +4,65 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <ListView
-        android:id="@+id/listViewExelFiles"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
-    </ListView>
-
-    <Button
-        android:id="@+id/loadButton"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="21dp"
-        android:minWidth="64dp"
-        android:text="Button"
-        android:width="200dp" />
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/loadButton"
-        android:layout_alignLeft="@+id/loadButton"
-        android:layout_marginBottom="39dp"
-        android:height="35dp"
-        android:text="TextView"
-        android:textSize="14sp"
-        android:width="200dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/buttonBackList"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:height="35dp"
+                android:text="TextView"
+                android:textSize="14sp"
+                android:width="200dp" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/listViewExelFiles"
+            android:layout_width="match_parent"
+            android:layout_height="150dp" >
+        </ListView>
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/editTextGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/loadButton"
-        android:layout_alignLeft="@+id/loadButton"
-        android:layout_alignRight="@+id/loadButton"
+        android:layout_centerHorizontal="true"
         android:ems="10"
         android:inputType="text" />
 
-    <ListView
-        android:id="@+id/listViewExcelSheets"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/listViewExelFiles" >
-    </ListView>
+    <Button
+        android:id="@+id/loadButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextGroup"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/editTextGroup"
+        android:minWidth="64dp"
+        android:text="Button"
+        android:width="200dp" />
+
+    <Spinner
+        android:id="@+id/spinnerSubgroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
 
 </RelativeLayout>
