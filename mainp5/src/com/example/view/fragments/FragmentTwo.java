@@ -54,8 +54,10 @@ public class FragmentTwo extends Fragment {
 		lvFiles = (ListView) rootView.findViewById(R.id.listViewExelFiles);
 		btnBackListView = (Button) rootView.findViewById(R.id.buttonBackList);
 		loadButton = (Button) rootView.findViewById(R.id.loadButton);
+		ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, new String[]{"1", "2"});
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spSubgroup = (Spinner) rootView.findViewById(R.id.spinnerSubgroup);
-		spSubgroup.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, new String[]{"1", "2"}));
+		spSubgroup.setAdapter(adapter);
 		manager = new ListViewExcelFilesManager(getActivity());
 		setState(1);
 		

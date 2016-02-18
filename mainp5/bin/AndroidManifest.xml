@@ -32,7 +32,7 @@
 
         <receiver
             android:name="com.example.widget.MyProvider"
-            android:label="@string/widget_name" >
+            android:label="@string/widget_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" >
                 </action>
