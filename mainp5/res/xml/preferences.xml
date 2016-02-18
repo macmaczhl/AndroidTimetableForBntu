@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <EditTextPreference
+        android:key="duration"
+        android:summary="в минутах"
+        android:title="Длительность пары" />
+      
+
+    <CheckBoxPreference
+        android:key="swapGroups"
+        android:summary="Для 1-2 курсов"
+        android:title="Менять местами подгруппы по неделям" />
+    <CheckBoxPreference 
+        android:key="swapWeeks"
+        android:title="Инвертировать недели" />
+
+</PreferenceScreen>
