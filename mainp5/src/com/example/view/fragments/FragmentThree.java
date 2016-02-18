@@ -1,6 +1,7 @@
 package com.example.view.fragments;
 
 import com.example.p5.R;
+import com.example.view.MainActivityNavig.MainSettingsFragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ public class FragmentThree extends Fragment {
 			Bundle savedInstanceState) {
 
 		View rootView = inflater.inflate(R.layout.fragment2, container, false);
+		//getFragmentManager().beginTransaction().replace(android.R.id.content, new MainSettingsFragment()).commit();
 
 		return rootView;
 	}

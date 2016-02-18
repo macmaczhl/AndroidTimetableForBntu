@@ -15,9 +15,12 @@ import android.annotation.SuppressLint;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.preference.PreferenceManager;
 import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.style.StyleSpan;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService.RemoteViewsFactory;
@@ -65,9 +68,9 @@ public class MyFactory implements RemoteViewsFactory {
 
 		RemoteViews rView = new RemoteViews(context.getPackageName(),
 				R.layout.item);
-
 		try {
-			rView.setTextViewText(R.id.tvDate, listLessons.get(position).getDate() + "\n\t" + listLessons.get(position).getEndOfLessonString());
+			Spanned textSpan  =  android.text.Html.fromHtml("<u>"+listLessons.get(position).getDate() +"</u>"+ "\n" + listLessons.get(position).getEndOfLessonString());
+			rView.setTextViewText(R.id.tvDate, textSpan);
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -143,12 +146,15 @@ public class MyFactory implements RemoteViewsFactory {
 	@Override
 	public void onDataSetChanged() {
 
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+		boolean swapWeeks = sp.getBoolean("swapWeeks", false);
+		
 		int week = MyProvider.calendar.get(Calendar.WEEK_OF_YEAR);// четный -
 																	// первая
 		if (week % 2 == 0)
-			week = 1;
+			week = swapWeeks?1:2;
 		else
-			week = 2;
+			week = swapWeeks?2:1;
 
 		try {
 			allLessons = XMLSerialize.read(context).list;

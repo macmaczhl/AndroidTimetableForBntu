@@ -1,6 +1,7 @@
 package com.example.view;
 
 import com.example.p5.R;
+import com.example.view.MainActivityNavig.MainSettingsFragment;
 import com.example.view.fragments.FragmentOne;
 import com.example.view.fragments.FragmentThree;
 import com.example.view.fragments.FragmentTwo;
@@ -9,8 +10,12 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,6 +53,17 @@ public class MainActivityNavig extends Activity implements
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
+		
+		
+		
+	}
+	
+	public static class MainSettingsFragment extends PreferenceFragment {
+		@Override
+		public void onCreate(Bundle savedInstanceState){
+			super.onCreate(savedInstanceState);
+			addPreferencesFromResource(R.xml.preferences);
+		}
 	}
 
 	@Override
@@ -72,7 +88,7 @@ public class MainActivityNavig extends Activity implements
 			if (fragment3 == null)
 				fragment3 = new FragmentThree();
 			fragmentManager.beginTransaction()
-					.replace(R.id.container, fragment3).commit();
+					.replace(R.id.container, new MainSettingsFragment()).commit();
 			break;
 		}
 
@@ -106,7 +122,6 @@ public class MainActivityNavig extends Activity implements
 			// if the drawer is not showing. Otherwise, let the drawer
 			// decide what to show in the action bar.
 			getMenuInflater().inflate(R.menu.main_activity_navig, menu);
-			restoreActionBar();
 			return true;
 		}
 		return super.onCreateOptionsMenu(menu);

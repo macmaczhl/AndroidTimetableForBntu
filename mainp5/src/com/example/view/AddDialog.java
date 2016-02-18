@@ -12,7 +12,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -31,6 +33,7 @@ public class AddDialog extends DialogFragment implements
 	int posEdit;
 	LessonData lessonData;
 
+
 	public AddDialog() {
 		title = "Добавление пары";
 		isEdit = false;
@@ -48,7 +51,8 @@ public class AddDialog extends DialogFragment implements
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(act.getActivity());
+		Log.d("issss", sp.getString("duration", " "));
 		form = getActivity().getLayoutInflater().inflate(R.layout.dialogadd,
 				null);
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -67,10 +71,9 @@ public class AddDialog extends DialogFragment implements
 		spinner3.setAdapter(adapter3);
 
 		EditText durationBox = (EditText) form.findViewById(R.id.item_duration);
-		durationBox.setText(defaultDuration);
+		durationBox.setText(sp.getString("duration", " "));
 		try {
 			lessonData = XMLSerialize.read(act.getActivity());
-			Log.d("issss", "???");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
