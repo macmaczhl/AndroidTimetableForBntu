@@ -18,14 +18,14 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Button" />
+                android:text="@string/frg2_btnback_name" />
 
             <TextView
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:height="35dp"
-                android:text="TextView"
                 android:textSize="14sp"
                 android:width="200dp" />
         </LinearLayout>
@@ -55,7 +55,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/editTextGroup"
         android:minWidth="64dp"
-        android:text="Button"
+        android:text="@string/frg2_btnload_name"
         android:width="200dp" />
 
     <Spinner

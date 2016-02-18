@@ -176,7 +176,7 @@ public class FragmentTwo extends Fragment {
 			outp.setText("Выберите файл");
 			break;
 		case 2:
-			outp.setText("Выберите лист и введите номер группы");
+			outp.setText("Выберите лист");
 			break;
 		}
 		this.state = state;

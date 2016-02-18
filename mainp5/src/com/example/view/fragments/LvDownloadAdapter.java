@@ -88,7 +88,7 @@ public class LvDownloadAdapter extends BaseAdapter {
 					if (lastSelectedView != null)
 						lastSelectedView.setBackgroundColor(Color.TRANSPARENT);
 					lastSelectedView = view;
-					fragment.outp.setText("Выберите лист");
+					fragment.outp.setText("Введите номер группы");
 				}
 			});
 
