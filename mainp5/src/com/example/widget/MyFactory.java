@@ -152,9 +152,9 @@ public class MyFactory implements RemoteViewsFactory {
 		int week = MyProvider.calendar.get(Calendar.WEEK_OF_YEAR);// четный -
 																	// первая
 		if (week % 2 == 0)
-			week = swapWeeks?1:2;
-		else
 			week = swapWeeks?2:1;
+		else
+			week = swapWeeks?1:2;
 
 		try {
 			allLessons = XMLSerialize.read(context).list;
