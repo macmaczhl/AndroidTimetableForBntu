@@ -24,8 +24,10 @@ public class LessonConverterFromParser {
 	// Получить готовые лессоны
 	public List<com.example.controller.Lesson> getConvertedLessons() {
 		List<com.example.controller.Lesson> convertedList = new ArrayList<com.example.controller.Lesson>();
-		
-		List <CellLesson> listCellLessons = parser.getContentByGroup(sheetNumber, group);
+		List <CellLesson> listCellLessons = null;
+		listCellLessons = parser.getContentByGroup(sheetNumber, group);
+		if (listCellLessons == null)
+			return null;
 			
 		com.example.controller.Lesson fillLesson = new com.example.controller.Lesson();
 		for (CellLesson cellLesson : listCellLessons) {

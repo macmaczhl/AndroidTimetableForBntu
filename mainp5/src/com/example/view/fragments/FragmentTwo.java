@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.p5.R;
 import com.example.xml.LessonData;
@@ -93,78 +95,38 @@ public class FragmentTwo extends Fragment {
 				if (state == 2) {
 					try {
 						if (!etGroup.getText().toString().equals("")) {
-							List<com.example.controller.Lesson> lessonList = manager.getLessons(lvSelectedFile, lvSelectedSheet, etGroup.getText().toString(), subgroup);
+							if (lvSelectedSheet == -1)
+							{
+								Toast.makeText(getActivity(), "Выберите лист", Toast.LENGTH_SHORT).show();
+								return;
+							}
+							List<com.example.controller.Lesson> lessonList = null;
+							String group = etGroup.getText().toString();
+							group = group.trim();
+							lessonList = manager.getLessons(lvSelectedFile, lvSelectedSheet, group, subgroup);
+							
+							if (lessonList == null) {
+								Toast.makeText(getActivity(), "Такой группы не существует", Toast.LENGTH_SHORT).show();
+								return;
+							}
+							
 							LessonData data = new LessonData(); data.list = lessonList;
 							Collections.sort(data.list); 
 							XMLSerialize.write(data, getActivity());
 						}
+						else {
+							Toast.makeText(getActivity(), "Такой группы не существует", Toast.LENGTH_SHORT).show();
+							return;
+						}							
 					}
 					catch (Exception e) { e.printStackTrace(); }
 					outp.setText("Рассписание загружено");
+					Toast.makeText(getActivity(), "Рассписание загружено", Toast.LENGTH_SHORT).show();
 				}
 			}
 		});		
 		
-		/*lvFiles.setOnItemClickListener(new OnItemClickListener() {
-
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				if (state == 1) {
-					lvSelectedFile = position;
-					manager.setSecondAdapterState();
-				}
-				if (state == 2) {
-					lvSelectedSheet = position;
-					outp.setText("File: " + lvSelectedFile + "Sheet: " + lvSelectedSheet);
-				}
-			}
-		});*/
-		/*
-		 * // Обработчик кнопки loadButton = (Button)
-		 * rootView.findViewById(R.id.loadButton); outp = (TextView)
-		 * rootView.findViewById(R.id.textView1); etGroup = (EditText)
-		 * rootView.findViewById(R.id.editTextGroup);
-		 * 
-		 * OnClickListener oclLoadBtn = new OnClickListener() {
-		 * 
-		 * @Override public void onClick(View v) { try {
-		 * List<com.example.controller.Lesson> lessonList = manager
-		 * .getLessons(lvSelectedFile, lvSelectedSheet,
-		 * etGroup.getText().toString(), 1); for (com.example.controller.Lesson
-		 * les : lessonList) { Log.d("OOO", les.toString()); } LessonData data =
-		 * new LessonData(); data.list = lessonList;
-		 * Collections.sort(data.list); XMLSerialize.write(data, getActivity());
-		 * outp.setText("Yes"); } catch (Exception e) { e.printStackTrace();
-		 * outp.setText("No"); } } }; loadButton.setOnClickListener(oclLoadBtn);
-		 * 
-		 * // Файлы manager = new ListViewExcelFilesManager(getActivity());
-		 * 
-		 * lvFiles = (ListView) rootView.findViewById(R.id.listViewExelFiles);
-		 * lvSheets = (ListView)
-		 * rootView.findViewById(R.id.listViewExcelSheets);
-		 * 
-		 * lvFiles.setAdapter(manager.getAdapterFiles());
-		 * 
-		 * lvFiles.setOnItemClickListener(new OnItemClickListener() {
-		 * 
-		 * public void onItemClick(AdapterView<?> parent, View view, int
-		 * position, long id) { lvSelectedFile = position;
-		 * 
-		 * outp.setText("itemClick: position = " + position + ", id = " + id);
-		 * int count = parent.getCount(); for (int i = 0; i < count; i++) {
-		 * parent.getChildAt(i).setBackgroundColor(Color.TRANSPARENT); }
-		 * view.setBackgroundColor(Color.GRAY);
-		 * 
-		 * // Листы manager.formLists(position);
-		 * lvSheets.setAdapter(manager.getAdapterSheets()); } });
-		 * 
-		 * lvSheets.setOnItemClickListener(new OnItemClickListener() {
-		 * 
-		 * public void onItemClick(AdapterView<?> parent, View view, int
-		 * position, long id) { lvSelectedSheet = position; } });
-		 * 
-		 * // ///////////////////////////
-		 */return rootView;
+		return rootView;
 	}
 
 	@Override

@@ -69,6 +69,7 @@ public class LvDownloadAdapter extends BaseAdapter {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					fragment.lvSelectedFile = position;
+					fragment.lvSelectedSheet = -1;
 					manager.formLists(position);
 					fragment.setState(2);
 				}

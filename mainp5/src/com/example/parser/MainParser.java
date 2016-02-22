@@ -115,8 +115,11 @@ public class MainParser {
 	public List<CellLesson> getContentByGroup(int sheetNumber, String group) {
 		Sheet sh = wb.getSheetAt(sheetNumber);
 		List<CellLesson> list = null;
-
-		CellPosition posGroup = findGroupCell(sh, group);
+		
+		CellPosition posGroup = new CellPosition(0, 0);
+		posGroup = findGroupCell(sh, group);
+		if (posGroup.col == 0 && posGroup.row == 0)
+			return null;
 		GroupParser gr = new GroupParser(sh, posGroup.row, posGroup.col);
 		list = gr.getLessons();
 		return list;
