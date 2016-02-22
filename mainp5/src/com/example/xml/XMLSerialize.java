@@ -3,6 +3,7 @@ package com.example.xml;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
@@ -10,6 +11,7 @@ import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
 import android.content.Context;
+import android.os.Environment;
 
 public class XMLSerialize {
 	static File file;
@@ -41,6 +43,31 @@ public class XMLSerialize {
 		is.close();
 		fis.close();
 
+		return lessonData;
+	}
+
+	public static void write(LessonData lessonData, String fileName)
+			throws Exception {
+		File file = new File(Environment.getExternalStorageDirectory()
+				.getPath() + "/Download/" + XMLSerialize.filename);
+		if (file.exists()) {
+			file.delete();
+		}
+		file.createNewFile();
+
+		Serializer serializer = new Persister();
+		serializer.write(lessonData, file);
+	}
+
+	public static LessonData read(Context context, String fileName)
+			throws Exception {
+		Serializer serializer = new Persister();
+		File file = new File(Environment.getExternalStorageDirectory()
+				.getPath() + "/Download/" + XMLSerialize.filename);
+		if (!file.exists()) {
+			return null;
+		}
+		LessonData lessonData = serializer.read(LessonData.class, file);
 		return lessonData;
 	}
 }

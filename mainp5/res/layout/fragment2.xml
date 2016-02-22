@@ -90,6 +90,27 @@
                 android:width="200dp" />
 
         </LinearLayout>
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_import"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="30dp"
+        android:text="@string/btn_import" />
+
+    <Button
+        android:id="@+id/btn_export"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="30dp"
+        android:text="@string/btn_export" />
 
 </RelativeLayout>

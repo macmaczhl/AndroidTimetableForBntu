@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,6 +27,9 @@ import com.example.xml.XMLSerialize;
 
 public class FragmentTwo extends Fragment {
 
+	Button btnImport;
+	Button btnExport;
+	
 	Button loadButton;
 	Button btnBackListView;
 	TextView outp;
@@ -50,6 +54,9 @@ public class FragmentTwo extends Fragment {
 			Bundle savedInstanceState) {
 
 		View rootView = inflater.inflate(R.layout.fragment2, container, false);
+		
+		btnImport = (Button) rootView.findViewById(R.id.btn_import);
+		btnExport = (Button) rootView.findViewById(R.id.btn_export);
 
 		outp = (TextView) rootView.findViewById(R.id.textView1);
 		etGroup = (EditText) rootView.findViewById(R.id.editTextGroup);
@@ -125,6 +132,35 @@ public class FragmentTwo extends Fragment {
 				}
 			}
 		});		
+		/////////////////////////////////////
+		// Импорт Экспорт
+		btnExport.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				LessonData data = new LessonData();
+				try {
+					data = XMLSerialize.read(getActivity());
+					XMLSerialize.write(data, "rasp");
+				}
+				catch (Exception e) { e.printStackTrace(); }
+				Toast.makeText(getActivity(), "Рассписание экспортировано", Toast.LENGTH_SHORT).show();
+			}
+		});
+		
+		btnImport.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				LessonData data = null; 
+				try {
+					data = XMLSerialize.read(getActivity(), "rasp");
+					XMLSerialize.write(data, getActivity());
+				}
+				catch (Exception e) { e.printStackTrace(); }
+				Toast.makeText(getActivity(), "Рассписание импортировано", Toast.LENGTH_SHORT).show();
+			}
+		});
 		
 		return rootView;
 	}

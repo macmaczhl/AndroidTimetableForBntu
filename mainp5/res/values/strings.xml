@@ -15,6 +15,8 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
+    <string name="btn_import">Import</string>
+    <string name="btn_export">Export</string>
 
     <string-array name="weekday">
         <item>воскресенье</item>
