@@ -5,6 +5,7 @@ import java.util.Collections;
 import com.example.controller.Lesson;
 import com.example.p5.R;
 import com.example.view.fragments.FragmentOne;
+import com.example.xml.DataManager;
 import com.example.xml.LessonData;
 import com.example.xml.XMLSerialize;
 
@@ -31,7 +32,8 @@ public class AddDialog extends DialogFragment implements
 	FragmentOne act;
 	boolean isEdit;
 	int posEdit;
-	LessonData lessonData;
+	DataManager dataManager;
+	int subGroup;
 
 
 	public AddDialog() {
@@ -52,7 +54,6 @@ public class AddDialog extends DialogFragment implements
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(act.getActivity());
-		Log.d("issss", sp.getString("duration", " "));
 		form = getActivity().getLayoutInflater().inflate(R.layout.dialogadd,
 				null);
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -73,11 +74,16 @@ public class AddDialog extends DialogFragment implements
 		EditText durationBox = (EditText) form.findViewById(R.id.item_duration);
 		durationBox.setText(sp.getString("duration", " "));
 		try {
-			lessonData = XMLSerialize.read(act.getActivity());
+			dataManager = XMLSerialize.read(act.getActivity());
+			subGroup = dataManager.getSubGroup(act.getActivity());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			lessonData = new LessonData();
+			dataManager = new DataManager();
+			dataManager.lessonData.add(new LessonData());
+			dataManager.lessonData.add(new LessonData());
+			dataManager.setSubGroup(1);
+			subGroup = 1;
 		}
 		if (isEdit) {
 			EditText timeBox = (EditText) form.findViewById(R.id.item_time);
@@ -87,15 +93,15 @@ public class AddDialog extends DialogFragment implements
 					.findViewById(R.id.item_classroom);
 			EditText corpusBox = (EditText) form.findViewById(R.id.item_corpus);
 
-			spinner2.setSelection(lessonData.list.get(posEdit).getWeek());
+			spinner2.setSelection(dataManager.lessonData.get(subGroup-1).list.get(posEdit).getWeek());
 
-			spinner3.setSelection(lessonData.list.get(posEdit).getType());
+			spinner3.setSelection(dataManager.lessonData.get(subGroup-1).list.get(posEdit).getType());
 
-			timeBox.setText(lessonData.list.get(posEdit).getDate());
-			subjectBox.setText(lessonData.list.get(posEdit).getSubject());
-			classroomBox.setText(lessonData.list.get(posEdit).getClassRoom());
-			corpusBox.setText(lessonData.list.get(posEdit).getCorpus());
-			durationBox.setText(String.valueOf(lessonData.list.get(posEdit).getDuration()));
+			timeBox.setText(dataManager.lessonData.get(subGroup-1).list.get(posEdit).getDate());
+			subjectBox.setText(dataManager.lessonData.get(subGroup-1).list.get(posEdit).getSubject());
+			classroomBox.setText(dataManager.lessonData.get(subGroup-1).list.get(posEdit).getClassRoom());
+			corpusBox.setText(dataManager.lessonData.get(subGroup-1).list.get(posEdit).getCorpus());
+			durationBox.setText(String.valueOf(dataManager.lessonData.get(subGroup-1).list.get(posEdit).getDuration()));
 		}
 
 		return (builder.setTitle(title).setView(form)
@@ -135,14 +141,16 @@ public class AddDialog extends DialogFragment implements
 			lesson.fillLesson(time, subject, corpus, classroom, dayOfWeek,
 					week, type,duration);
 			if (isEdit) {
-				lessonData.list.set(posEdit, lesson);
+				dataManager.lessonData.get(subGroup-1).list.set(posEdit, lesson);
 			} else {
-				lessonData.list.add(lesson);
+				dataManager.lessonData.get(subGroup-1).list.add(lesson);
 			}
-			Collections.sort(lessonData.list);
-			XMLSerialize.write(lessonData, act.getActivity());
+			Collections.sort(dataManager.lessonData.get(subGroup-1).list);
+			XMLSerialize.write(dataManager, act.getActivity());
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
+			Log.d("azaza23", String.valueOf(subGroup));
+			Log.d("azaza23", e1.toString());
 			e1.printStackTrace();
 		}
 		act.ShowList();

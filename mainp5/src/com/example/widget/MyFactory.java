@@ -22,6 +22,7 @@ import android.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService.RemoteViewsFactory;
 
@@ -32,6 +33,7 @@ public class MyFactory implements RemoteViewsFactory {
 	Context context;
 	SimpleDateFormat sdf;
 	int widgetID;
+	int subGroup;
 
 	MyFactory(Context ctx, Intent intent) {
 
@@ -157,7 +159,8 @@ public class MyFactory implements RemoteViewsFactory {
 			week = swapWeeks?1:2;
 
 		try {
-			allLessons = XMLSerialize.read(context).list;
+			subGroup = XMLSerialize.read(context).getSubGroup(context);
+			allLessons = XMLSerialize.read(context).lessonData.get(subGroup-1).list;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -8,6 +8,7 @@ import java.util.List;
 import com.example.p5.R;
 import com.example.view.AddDialog;
 import com.example.view.fragments.FragmentOne;
+import com.example.xml.DataManager;
 import com.example.xml.LessonData;
 import com.example.xml.XMLSerialize;
 
@@ -40,6 +41,8 @@ public class LessonAdapter extends BaseAdapter {
 	List<Lesson> allLessons = new ArrayList<Lesson>();
 	FragmentOne act;
 	AlertDialog.Builder ad;
+	int subGroup;
+	DataManager dataManager;
 
 	public void SetActivity(FragmentOne act) {
 		this.act = act;
@@ -132,7 +135,8 @@ public class LessonAdapter extends BaseAdapter {
 				Lesson temp = new Lesson();
 				temp.fillLesson(date, subj, corpus, room, selected, week, 0,"0");
 				try {
-					allLessons = XMLSerialize.read(act.getActivity()).list;
+					subGroup = XMLSerialize.read(act.getActivity()).getSubGroup(act.getActivity());
+					allLessons = XMLSerialize.read(act.getActivity()).lessonData.get(subGroup-1).list;
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -167,13 +171,14 @@ public class LessonAdapter extends BaseAdapter {
 						temp.fillLesson(date, subj, corpus, room, selected,
 								week, 0,"0");
 						try {
-							allLessons = XMLSerialize.read(act.getActivity()).list;
+							dataManager = XMLSerialize.read(act.getActivity());
+							subGroup = dataManager.getSubGroup(act.getActivity());
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 
-						Iterator<Lesson> iter = allLessons.iterator();
+						Iterator<Lesson> iter = dataManager.lessonData.get(subGroup-1).list.iterator();
 						while (iter.hasNext()) {
 							Lesson lesson = iter.next();
 
@@ -182,12 +187,9 @@ public class LessonAdapter extends BaseAdapter {
 								break;
 							}
 						}
-
-						LessonData lessonData = new LessonData();
-						lessonData.list = allLessons;
 						try {
-							Collections.sort(lessonData.list);
-							XMLSerialize.write(lessonData, act.getActivity());
+							Collections.sort(dataManager.lessonData.get(subGroup-1).list);
+							XMLSerialize.write(dataManager, act.getActivity());
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

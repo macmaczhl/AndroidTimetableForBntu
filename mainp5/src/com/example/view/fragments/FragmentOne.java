@@ -23,7 +23,7 @@ import android.widget.Spinner;
 public class FragmentOne extends Fragment {
 	Spinner spinner;
 	public static int selected;
-
+	int subGroup;
 	View bufView;
 
 	public FragmentOne() {
@@ -76,7 +76,8 @@ public class FragmentOne extends Fragment {
 		try {
 			List<Lesson> allLessons = new ArrayList<Lesson>();
 			List<Lesson> currentList = new ArrayList<Lesson>();
-			allLessons = XMLSerialize.read(this.getActivity()).list;
+			subGroup = XMLSerialize.read(this.getActivity()).getSubGroup(getActivity());
+			allLessons = XMLSerialize.read(this.getActivity()).lessonData.get(subGroup-1).list;
 
 			for (Lesson obj : allLessons) {
 				if (obj.getDay() == selected)

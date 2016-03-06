@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.p5.R;
+import com.example.xml.DataManager;
 import com.example.xml.LessonData;
 import com.example.xml.XMLSerialize;
 
@@ -107,28 +108,43 @@ public class FragmentTwo extends Fragment {
 								Toast.makeText(getActivity(), "Выберите лист", Toast.LENGTH_SHORT).show();
 								return;
 							}
-							List<com.example.controller.Lesson> lessonList = null;
+							List<com.example.controller.Lesson> lessonList1 = null;
+							List<com.example.controller.Lesson> lessonList2 = null;
 							String group = etGroup.getText().toString();
 							group = group.trim();
-							lessonList = manager.getLessons(lvSelectedFile, lvSelectedSheet, group, subgroup);
+							lessonList1 = manager.getLessons(lvSelectedFile, lvSelectedSheet, group, 1);
+							lessonList2 = manager.getLessons(lvSelectedFile, lvSelectedSheet, group, 2);
 							
-							if (lessonList == null) {
+							if (lessonList1 == null || lessonList2 == null) {
 								Toast.makeText(getActivity(), "Такой группы не существует", Toast.LENGTH_SHORT).show();
 								return;
 							}
+							DataManager dataManager = new DataManager();
+							dataManager.setSubGroup(subgroup);
+							LessonData data1 = new LessonData(); 
+							LessonData data2 = new LessonData(); 
 							
-							LessonData data = new LessonData(); data.list = lessonList;
-							Collections.sort(data.list); 
-							XMLSerialize.write(data, getActivity());
+							data1.list = lessonList1;
+							Collections.sort(data1.list); 
+							data2.list = lessonList2;
+							Collections.sort(data2.list); 
+							
+							dataManager.lessonData.add(data1);
+							dataManager.lessonData.add(data2);
+							
+							XMLSerialize.write(dataManager, getActivity());
 						}
 						else {
 							Toast.makeText(getActivity(), "Такой группы не существует", Toast.LENGTH_SHORT).show();
 							return;
-						}							
+						}		
+						outp.setText("Рассписание загружено");
+						Toast.makeText(getActivity(), "Рассписание загружено", Toast.LENGTH_SHORT).show();					
 					}
-					catch (Exception e) { e.printStackTrace(); }
-					outp.setText("Рассписание загружено");
-					Toast.makeText(getActivity(), "Рассписание загружено", Toast.LENGTH_SHORT).show();
+					catch (Exception e) { 
+						e.printStackTrace();
+						Log.d("azaza23", e.toString());
+					}
 				}
 			}
 		});		
@@ -138,13 +154,16 @@ public class FragmentTwo extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				LessonData data = new LessonData();
+				DataManager dataManager = new DataManager();
 				try {
-					data = XMLSerialize.read(getActivity());
-					XMLSerialize.write(data, "rasp");
+					dataManager = XMLSerialize.read(getActivity());
+					XMLSerialize.write(dataManager, "rasp");
+					Toast.makeText(getActivity(), "Рассписание экспортировано", Toast.LENGTH_SHORT).show();
+
 				}
-				catch (Exception e) { e.printStackTrace(); }
-				Toast.makeText(getActivity(), "Рассписание экспортировано", Toast.LENGTH_SHORT).show();
+				catch (Exception e) { e.printStackTrace(); 
+				Log.d("azaza23",e.toString());
+				}
 			}
 		});
 		
@@ -152,13 +171,13 @@ public class FragmentTwo extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				LessonData data = null; 
+				DataManager dataManager = null;
 				try {
-					data = XMLSerialize.read(getActivity(), "rasp");
-					XMLSerialize.write(data, getActivity());
+					dataManager = XMLSerialize.read(getActivity(), "rasp");
+					XMLSerialize.write(dataManager, getActivity());
+					Toast.makeText(getActivity(), "Рассписание импортировано", Toast.LENGTH_SHORT).show();
 				}
 				catch (Exception e) { e.printStackTrace(); }
-				Toast.makeText(getActivity(), "Рассписание импортировано", Toast.LENGTH_SHORT).show();
 			}
 		});
 		

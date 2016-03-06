@@ -12,12 +12,13 @@ import org.simpleframework.xml.core.Persister;
 
 import android.content.Context;
 import android.os.Environment;
+import android.util.Log;
 
 public class XMLSerialize {
-	static File file;
+	//static File file;
 	static String filename = "raspisanie.xml";
 
-	public static void write(LessonData lessonData, Context context)
+	public static void write(DataManager dataManager, Context context)
 			throws Exception {
 		Serializer serializer = new Persister();
 		// file = new File("/mnt/sdcard2/test2.xml");
@@ -25,29 +26,30 @@ public class XMLSerialize {
 		FileOutputStream fos = context.openFileOutput(filename,
 				Context.MODE_WORLD_WRITEABLE);
 		OutputStreamWriter os = new OutputStreamWriter(fos);
-		serializer.write(lessonData, os);
+		serializer.write(dataManager, os);
 		os.close();
 		fos.flush();
 		fos.close();
 	}
 
-	public static LessonData read(Context context) throws Exception {
+	public static DataManager read(Context context) throws Exception {
 		Serializer serializer = new Persister();
 		// file = new File("/mnt/sdcard2/test2.xml");
 		// LessonData lessonData = serializer.read(LessonData.class, file);
 
 		FileInputStream fis = context.openFileInput(filename);
 		InputStreamReader is = new InputStreamReader(fis);
-		LessonData lessonData = serializer.read(LessonData.class, is);
+		DataManager dataManager = serializer.read(DataManager.class, is);
 
 		is.close();
 		fis.close();
 
-		return lessonData;
+		return dataManager;
 	}
 
-	public static void write(LessonData lessonData, String fileName)
+	public static void write(DataManager dataManager, String fileName)
 			throws Exception {
+		//TODO œ≈–≈«¿œ»—‹
 		File file = new File(Environment.getExternalStorageDirectory()
 				.getPath() + "/Download/" + XMLSerialize.filename);
 		if (file.exists()) {
@@ -56,10 +58,11 @@ public class XMLSerialize {
 		file.createNewFile();
 
 		Serializer serializer = new Persister();
-		serializer.write(lessonData, file);
+		serializer.write(dataManager, file);
+		Log.d("azaza22", file.getPath());
 	}
 
-	public static LessonData read(Context context, String fileName)
+	public static DataManager read(Context context, String fileName)
 			throws Exception {
 		Serializer serializer = new Persister();
 		File file = new File(Environment.getExternalStorageDirectory()
@@ -67,7 +70,7 @@ public class XMLSerialize {
 		if (!file.exists()) {
 			return null;
 		}
-		LessonData lessonData = serializer.read(LessonData.class, file);
-		return lessonData;
+		DataManager dataManager = serializer.read(DataManager.class, file);
+		return dataManager;
 	}
 }

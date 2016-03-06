@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
@@ -21,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TabHost;
 
 public class MainActivityNavig extends Activity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -28,6 +30,7 @@ public class MainActivityNavig extends Activity implements
 	FragmentOne fragment1 = null;
 	FragmentTwo fragment2 = null;
 	FragmentThree fragment3 = null;
+	
 
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the
@@ -45,6 +48,8 @@ public class MainActivityNavig extends Activity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_activity_navig);
+		
+		
 
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
@@ -53,9 +58,13 @@ public class MainActivityNavig extends Activity implements
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
+	   
 		
 		
-		
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+		Editor ed = sp.edit();
+		ed.putString("duration", "95");
+		ed.commit();
 	}
 	
 	public static class MainSettingsFragment extends PreferenceFragment {
