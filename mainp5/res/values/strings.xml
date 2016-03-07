@@ -9,12 +9,11 @@
     <string name="title_activity_main2">MainActivity</string>
     <string name="title_section1">Просмотр</string>
     <string name="title_section2">Загрузка</string>
-    <string name="title_section3">Настройки</string>
     <string name="frg2_btnback_name">Назад</string>
     <string name="frg2_btnload_name">Загрузить</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
+    <string name="action_add">+</string>
     <string name="btn_import">Import</string>
     <string name="btn_export">Export</string>
 

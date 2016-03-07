@@ -10,6 +10,7 @@ import com.example.p5.R;
 import com.example.xml.XMLSerialize;
 
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,8 @@ public class FragmentOne extends Fragment {
 	@Override
 	public void onViewCreated(View viewMain, Bundle savedInstanceState) {
 		// ////////////////
+		View view = getActivity().findViewById(R.id.legend);
+		view.setBackgroundResource(R.drawable.shapelegend);
 		bufView = viewMain;
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
 				android.R.layout.simple_spinner_item, getResources()

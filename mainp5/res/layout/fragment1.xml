@@ -1,83 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/activity_color"
-    android:orientation="vertical" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="match_parent"
-        android:layout_height="47dp"
-        android:spinnerMode="dialog" />
+    <include layout="@layout/header" android:id="@+id/header" />
 
-    <Button
-        android:id="@+id/buttonAdd"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:onClick="onClick"
-        android:text="Добавить" />
+    <include layout="@layout/footer" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+    <RelativeLayout
+        android:id="@+id/content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/footer"
+        android:layout_below="@id/header"
+        android:gravity="center" >
 
-        <TextView
-            android:id="@+id/tvWeekS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Нед"
-            android:textSize="14sp"
-            android:width="35dp" >
-        </TextView>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#fff"
+            android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/tvDateS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Время"
-            android:textSize="14sp"
-            android:width="50dp" >
-        </TextView>
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:spinnerMode="dialog" />
 
-        <TextView
-            android:id="@+id/tvSubjS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Предмет"
-            android:textSize="14sp"
-            android:width="140dp" >
-        </TextView>
+            <LinearLayout
+        		android:id="@+id/legend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+    			android:padding="7dp" >
 
-        <TextView
-            android:id="@+id/tvCorpusS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Корп"
-            android:textSize="14sp"
-            android:width="45dp" >
-        </TextView>
+                <TextView
+                    android:id="@+id/tvWeekS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textSize="14sp"
+                    android:width="15dp" 
+                    android:height="20dp"
+                    android:gravity="center_vertical">
+                </TextView>
 
-        <TextView
-            android:id="@+id/tvRoomS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Каб"
-            android:textSize="14sp"
-            android:width="30dp" >
-        </TextView>
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tvDateS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Время"
+                    android:textSize="14sp"
+                    android:width="50dp"
+                    android:gravity="center_vertical" >
+                </TextView>
 
-    <ListView
-        android:id="@+id/gridView"
-        android:layout_width="match_parent"
-        android:layout_height="307dp" >
-    </ListView>
+                <TextView
+                    android:id="@+id/tvSubjS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Предмет"
+                    android:textSize="14sp"
+                    android:width="140dp" 
+                    android:gravity="center_vertical">
+                </TextView>
 
-</LinearLayout>
+                <TextView
+                    android:id="@+id/tvCorpusS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Корп"
+                    android:textSize="14sp"
+                    android:width="45dp"
+                    android:gravity="center_vertical" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvRoomS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Каб"
+                    android:textSize="14sp"
+                    android:width="30dp"
+                    android:gravity="center_vertical" >
+                </TextView>
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/gridView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp" >
+            </ListView>
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

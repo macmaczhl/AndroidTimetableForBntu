@@ -3,7 +3,6 @@ package com.example.view;
 import com.example.p5.R;
 import com.example.view.MainActivityNavig.MainSettingsFragment;
 import com.example.view.fragments.FragmentOne;
-import com.example.view.fragments.FragmentThree;
 import com.example.view.fragments.FragmentTwo;
 
 import android.app.ActionBar;
@@ -12,6 +11,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.gesture.GestureOverlayView;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
@@ -24,13 +25,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
 
-public class MainActivityNavig extends Activity implements
-		NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class MainActivityNavig extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
 	FragmentOne fragment1 = null;
 	FragmentTwo fragment2 = null;
-	FragmentThree fragment3 = null;
-	
+
+	boolean isPrefOpen = false;
 
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the
@@ -48,28 +48,23 @@ public class MainActivityNavig extends Activity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_activity_navig);
-		
-		
 
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
 		mTitle = getTitle();
 
 		// Set up the drawer.
-		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
-				(DrawerLayout) findViewById(R.id.drawer_layout));
-	   
-		
-		
+		mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
 		Editor ed = sp.edit();
 		ed.putString("duration", "95");
 		ed.commit();
 	}
-	
+
 	public static class MainSettingsFragment extends PreferenceFragment {
 		@Override
-		public void onCreate(Bundle savedInstanceState){
+		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			addPreferencesFromResource(R.xml.preferences);
 		}
@@ -84,23 +79,14 @@ public class MainActivityNavig extends Activity implements
 		case 0:
 			if (fragment1 == null)
 				fragment1 = new FragmentOne();
-			fragmentManager.beginTransaction()
-					.replace(R.id.container, fragment1).commit();
+			fragmentManager.beginTransaction().replace(R.id.container, fragment1).commit();
 			break;
 		case 1:
 			if (fragment2 == null)
 				fragment2 = new FragmentTwo();
-			fragmentManager.beginTransaction()
-					.replace(R.id.container, fragment2).commit();
-			break;
-		default:
-			if (fragment3 == null)
-				fragment3 = new FragmentThree();
-			fragmentManager.beginTransaction()
-					.replace(R.id.container, new MainSettingsFragment()).commit();
+			fragmentManager.beginTransaction().replace(R.id.container, fragment2).commit();
 			break;
 		}
-
 	}
 
 	public void onSectionAttached(int number) {
@@ -110,9 +96,6 @@ public class MainActivityNavig extends Activity implements
 			break;
 		case 2:
 			mTitle = getString(R.string.title_section2);
-			break;
-		case 3:
-			mTitle = getString(R.string.title_section3);
 			break;
 		}
 	}
@@ -141,8 +124,29 @@ public class MainActivityNavig extends Activity implements
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
+		FragmentOne fragment1 = null;
+		FragmentManager fragmentManager = getFragmentManager();
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		if (item.getItemId() == R.id.action_preferences) {
+			isPrefOpen = !isPrefOpen;
+			if (isPrefOpen) {
+				this.findViewById(R.id.action_preferences).setBackgroundColor(Color.RED);
+				fragmentManager.beginTransaction().replace(R.id.container, new MainSettingsFragment()).commit();
+			} else {
+				this.findViewById(R.id.action_preferences).setBackgroundColor(Color.TRANSPARENT);
+				if (fragment1 == null)
+					fragment1 = new FragmentOne();
+				fragmentManager.beginTransaction().replace(R.id.container, fragment1).commit();
+			}
+			return true;
+		}
+		if (item.getItemId() == R.id.action_add) {
+			AddDialog dlg1 = new AddDialog();
+			if (fragment1 == null)
+				fragment1 = new FragmentOne();
+			fragmentManager.beginTransaction().replace(R.id.container, fragment1).commit();
+			dlg1.show(fragment1.getFragmentManager(), "228");
+			dlg1.SetActivity(fragment1);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -173,28 +177,16 @@ public class MainActivityNavig extends Activity implements
 		}
 
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(
-					R.layout.fragment_main_activity_navig, container, false);
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_main_activity_navig, container, false);
 			return rootView;
 		}
 
 		@Override
 		public void onAttach(Activity activity) {
 			super.onAttach(activity);
-			((MainActivityNavig) activity).onSectionAttached(getArguments()
-					.getInt(ARG_SECTION_NUMBER));
+			((MainActivityNavig) activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
 		}
 	}
 
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.buttonAdd:
-			AddDialog dlg1 = new AddDialog();
-			dlg1.show(fragment1.getFragmentManager(), "228");
-			dlg1.SetActivity(fragment1);
-			break;
-		}
-	}
 }

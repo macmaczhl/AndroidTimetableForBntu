@@ -84,10 +84,11 @@ public class LessonAdapter extends BaseAdapter {
 		Lesson p = lessons.get(position);
 		switch (p.getType()) {
 		case 0:
-			view.setBackgroundColor(0xFFF68000);
+			//view.setBackgroundColor(0xFFF68000);
+			view.setBackgroundResource(R.drawable.shapelect);
 			break;
 		case 1:
-			view.setBackgroundColor(Color.YELLOW);
+			view.setBackgroundResource(R.drawable.shapepract);
 			break;
 		}
 

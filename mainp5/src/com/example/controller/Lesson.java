@@ -22,7 +22,6 @@ public class Lesson implements Comparable<Lesson> {
 	private int type;
 	private int week;
 
-	@SuppressLint("SimpleDateFormat")
 	public void fillLesson(String time, String subjname, String corpus,
 			String classroom, int day, int week, int type,String duration) {
 		DateFormat format = new SimpleDateFormat("HH:mm");
@@ -43,7 +42,6 @@ public class Lesson implements Comparable<Lesson> {
 		this.duration = Integer.valueOf(duration);
 	}
 
-	@SuppressLint("SimpleDateFormat")
 	public Lesson() {
 	}
 
@@ -85,7 +83,6 @@ public class Lesson implements Comparable<Lesson> {
 	
 	
 
-	@SuppressLint("SimpleDateFormat")
 	@Element(name = "date")
 	public String getDate() {
 		DateFormat format = new SimpleDateFormat("HH:mm");

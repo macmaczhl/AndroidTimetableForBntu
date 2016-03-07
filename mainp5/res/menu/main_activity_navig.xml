@@ -3,13 +3,14 @@
     tools:context="com.example.p5.MainActivityNavig" >
 
     <item
-        android:id="@+id/action_example"
-        android:showAsAction="withText|ifRoom"
-        android:title="@string/action_example"/>
+        android:id="@+id/action_add"
+        android:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/action_add"/>
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
+        android:id="@+id/action_preferences"
+        android:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_menu_preferences"
         android:title="@string/action_settings"/>
 
 </menu>
