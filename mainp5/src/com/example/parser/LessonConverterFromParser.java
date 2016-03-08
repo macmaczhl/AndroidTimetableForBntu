@@ -7,6 +7,9 @@ import org.apache.poi.ss.formula.IStabilityClassifier;
 
 import com.example.view.AddDialog;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class LessonConverterFromParser {
@@ -14,8 +17,12 @@ public class LessonConverterFromParser {
 	int sheetNumber;
 	String group;
 	int subgroup;
+	Context context;
+	String duration;
 	
-	public LessonConverterFromParser(MainParser parser, int sheetNumber, String group, int subgroup) {
+	public LessonConverterFromParser(MainParser parser, int sheetNumber, String group, int subgroup,Context context) {
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+		duration = sp.getString("duration", "95");
 		this.parser = parser;
 		this.sheetNumber = sheetNumber;
 		this.group = group;
@@ -33,7 +40,7 @@ public class LessonConverterFromParser {
 		for (CellLesson cellLesson : listCellLessons) {
 			if (!(cellLesson.isSorted())) {
 				Lesson bufLess = cellLesson.getLesson();
-				fillLesson.fillLesson(convertTime(bufLess.getTime()), bufLess.getSubject(), "", "", bufLess.getTime().getDay(), 0,0, AddDialog.defaultDuration);
+				fillLesson.fillLesson(convertTime(bufLess.getTime()), bufLess.getSubject(), "", "", bufLess.getTime().getDay(), 0,0, duration);
 			}
 			else {
 				switch (cellLesson.getTypeOfCell()) {
@@ -220,6 +227,6 @@ public class LessonConverterFromParser {
 		if (classroom == null)
 			classroom = " ";
 		int day = from.getTime().getDay();
-		to.fillLesson(time, subject, housing, classroom, day, week, type,AddDialog.defaultDuration);
+		to.fillLesson(time, subject, housing, classroom, day, week, type,duration);
 	}
 }

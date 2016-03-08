@@ -4,15 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentTop="true"
-    android:background="#FC0"
+    android:background="#FFF"
     android:gravity="center" >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/button1"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="Fixed Header"
-        android:textColor="#000"
-        android:textSize="20sp" />
+        android:layout_alignParentLeft="true"
+        android:text="1 подгруппа" 
+        android:background="@drawable/shapebutton"/>
+
+    <Button
+        android:id="@+id/button2"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="2 подгруппа"
+        android:background="@drawable/shapebutton" />
 
 </RelativeLayout>

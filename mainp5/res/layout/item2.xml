@@ -13,7 +13,7 @@
 		    android:layout_marginTop="5dp"
 		    android:text=""
 		    android:textSize="14sp"
-		    android:width="15dp"
+		    android:width="35dp"
 		    android:minHeight="50dp" >
 
 		</TextView>
@@ -35,7 +35,7 @@
 		    android:layout_marginTop="5dp"
 		    android:text=""
 		    android:textSize="14sp"
-		    android:width="140dp" >
+		    android:width="200dp" >
 
 		</TextView>
 
@@ -46,7 +46,7 @@
 		    android:layout_marginTop="5dp"
 		    android:text=""
 		    android:textSize="14sp"
-		    android:width="45dp" >
+		    android:width="30dp" >
 
 		</TextView>
 		<TextView
@@ -60,18 +60,5 @@
 
 		</TextView>
 		
-		<ImageButton
-		    android:id="@+id/tvEditButton"
-		    android:src="@drawable/pencil"
-		    android:layout_width="30dp"
-		    android:layout_height="30dp"
-		    android:background="@android:color/transparent"/>
-		
-		<ImageButton
-		    android:id="@+id/tvDeleteButton"
-		    android:src="@drawable/krest"
-		    android:layout_width="30dp"
-		    android:layout_height="30dp"
-		    android:background="@android:color/transparent"/>
 
 </LinearLayout>

@@ -3,9 +3,6 @@
     android:shape="rectangle" >
 
     
-    <gradient android:type="linear" android:endColor="#ffc125" android:startColor="#ffc125" android:angle="45.0"/>
-    <stroke
-        android:width="3dp"
-        android:color="#ffc125" />
+    <gradient android:type="linear" android:endColor="#FC0" android:startColor="#FC0" android:angle="45.0"/>
 
 </shape>

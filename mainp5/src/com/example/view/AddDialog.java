@@ -3,6 +3,7 @@ package com.example.view;
 import java.util.Collections;
 
 import com.example.controller.Lesson;
+import com.example.controller.LessonAdapter;
 import com.example.p5.R;
 import com.example.view.fragments.FragmentOne;
 import com.example.xml.DataManager;
@@ -24,7 +25,6 @@ import android.widget.Spinner;
 
 public class AddDialog extends DialogFragment implements
 		DialogInterface.OnClickListener {
-	public final static String defaultDuration = "95";
 	private View form = null;
 	String title;
 	Spinner spinner2;
@@ -39,6 +39,7 @@ public class AddDialog extends DialogFragment implements
 	public AddDialog() {
 		title = "Добавление пары";
 		isEdit = false;
+		
 	}
 
 	public AddDialog(int position) {
@@ -47,7 +48,7 @@ public class AddDialog extends DialogFragment implements
 		posEdit = position;
 	}
 
-	public void SetActivity(FragmentOne act) {
+	public void SetFragment(FragmentOne act) {
 		this.act = act;
 	}
 
@@ -72,10 +73,10 @@ public class AddDialog extends DialogFragment implements
 		spinner3.setAdapter(adapter3);
 
 		EditText durationBox = (EditText) form.findViewById(R.id.item_duration);
-		durationBox.setText(sp.getString("duration", " "));
+		durationBox.setText(sp.getString("duration", "95"));
 		try {
 			dataManager = XMLSerialize.read(act.getActivity());
-			subGroup = dataManager.getSubGroup(act.getActivity());
+			subGroup = act.getSubGroup();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -125,7 +126,7 @@ public class AddDialog extends DialogFragment implements
 		corpus = corpusBox.getText().toString();
 		classroom = classroomBox.getText().toString();
 		duration = durationBox.getText().toString();
-		int dayOfWeek = FragmentOne.selected;
+		int dayOfWeek = MainActivityNavig.selected;
 		int week = spinner2.getSelectedItemPosition();
 		int type = spinner3.getSelectedItemPosition();
 
@@ -148,12 +149,9 @@ public class AddDialog extends DialogFragment implements
 			Collections.sort(dataManager.lessonData.get(subGroup-1).list);
 			XMLSerialize.write(dataManager, act.getActivity());
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			Log.d("azaza23", String.valueOf(subGroup));
-			Log.d("azaza23", e1.toString());
 			e1.printStackTrace();
 		}
-		act.ShowList();
+		act.FillLessonAdapter(subGroup);
 	}
 
 	@Override

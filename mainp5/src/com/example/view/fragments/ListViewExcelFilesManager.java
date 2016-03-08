@@ -92,7 +92,7 @@ public class ListViewExcelFilesManager {
 	public List<com.example.controller.Lesson> getLessons(int selectedFile,
 			int selectedSheet, String group, int subgroup) {
 		LessonConverterFromParser converter = new LessonConverterFromParser(
-				parser, selectedSheet, group, subgroup);
+				parser, selectedSheet, group, subgroup,activity);
 		return converter.getConvertedLessons();
 	}
 }

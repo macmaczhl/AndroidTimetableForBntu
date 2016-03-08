@@ -1,16 +1,23 @@
 package com.example.view;
 
+import java.util.Calendar;
+
 import com.example.p5.R;
 import com.example.view.MainActivityNavig.MainSettingsFragment;
 import com.example.view.fragments.FragmentOne;
 import com.example.view.fragments.FragmentTwo;
+import com.example.widget.MyProvider;
+import com.example.xml.XMLSerialize;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.AlertDialog.Builder;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.ActivityInfo;
 import android.gesture.GestureOverlayView;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -27,8 +34,10 @@ import android.widget.TabHost;
 
 public class MainActivityNavig extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
+	public static int subGroup;
 	FragmentOne fragment1 = null;
 	FragmentTwo fragment2 = null;
+	public static int selected;
 
 	boolean isPrefOpen = false;
 
@@ -46,9 +55,11 @@ public class MainActivityNavig extends Activity implements NavigationDrawerFragm
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_activity_navig);
-
+		selected = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
 		mTitle = getTitle();
@@ -60,6 +71,16 @@ public class MainActivityNavig extends Activity implements NavigationDrawerFragm
 		Editor ed = sp.edit();
 		ed.putString("duration", "95");
 		ed.commit();
+		
+		
+
+		try {
+			subGroup = XMLSerialize.read(this).getSubGroup(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	public static class MainSettingsFragment extends PreferenceFragment {
@@ -146,7 +167,14 @@ public class MainActivityNavig extends Activity implements NavigationDrawerFragm
 				fragment1 = new FragmentOne();
 			fragmentManager.beginTransaction().replace(R.id.container, fragment1).commit();
 			dlg1.show(fragment1.getFragmentManager(), "228");
-			dlg1.SetActivity(fragment1);
+			dlg1.SetFragment(fragment1);
+			return true;
+		}
+		if (item.getItemId() == R.id.action_about) {
+			Builder ad = new AlertDialog.Builder(this);
+			ad.setTitle("БНТУ Расписание"); // заголовок
+			ad.setMessage("Версия 1.0\nРазработчики: \nСергей Левшунов \nЕгор Рыбченко");
+			ad.show();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

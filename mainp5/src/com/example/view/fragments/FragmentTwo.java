@@ -161,8 +161,8 @@ public class FragmentTwo extends Fragment {
 					Toast.makeText(getActivity(), "Рассписание экспортировано", Toast.LENGTH_SHORT).show();
 
 				}
-				catch (Exception e) { e.printStackTrace(); 
-				Log.d("azaza23",e.toString());
+				catch (Exception e) {
+					e.printStackTrace(); 
 				}
 			}
 		});
