@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
@@ -29,7 +29,6 @@
                 android:height="35dp"
                 android:textSize="20sp"
                 android:width="200dp" />
-
         </LinearLayout>
 
         <ListView
@@ -39,11 +38,10 @@
         </ListView>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/linearLayout1"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:layout_below="@+id/linearLayout1" >
 
             <TextView
                 android:id="@+id/textView2"
@@ -53,64 +51,63 @@
 
             <EditText
                 android:id="@+id/editTextGroup"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/loadButton"
                 android:layout_centerHorizontal="true"
                 android:ems="10"
                 android:inputType="text" />
-
-
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/linearLayout1"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:layout_below="@+id/linearLayout1" >
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="92dp"
+                android:layout_width="wrap_content"
+                android:layout_weight="0.3"
                 android:layout_height="50dp"
                 android:text="Номер подгруппы" />
 
             <Spinner
                 android:id="@+id/spinnerSubgroup"
-                android:layout_width="68dp"
+                android:layout_width="wrap_content"
+                android:layout_weight="0.2"
                 android:layout_height="50dp" />
-            
+
             <Button
                 android:id="@+id/loadButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:width="160dp"
+                android:layout_weight="0.5"
+                android:text="@string/frg2_btnload_name" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearLayout1"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btn_export"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="64dp"
-                android:text="@string/frg2_btnload_name"
-                android:width="200dp" />
+                android:layout_weight="0.5"
+                android:text="@string/btn_export" />
 
+            <Button
+                android:id="@+id/btn_import"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/btn_import" />
         </LinearLayout>
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_import"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="30dp"
-        android:layout_marginLeft="30dp"
-        android:text="@string/btn_import" />
-
-    <Button
-        android:id="@+id/btn_export"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="30dp"
-        android:layout_marginRight="30dp"
-        android:text="@string/btn_export" />
 
 </RelativeLayout>

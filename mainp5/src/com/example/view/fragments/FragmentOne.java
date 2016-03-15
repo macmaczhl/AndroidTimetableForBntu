@@ -83,7 +83,6 @@ public class FragmentOne extends Fragment {
 		listButton.add(buttonSaturday);
 		
 
-		setSelectedButton(listButton, MainActivityNavig.selected);
 	
 		button1 = (Button)rootView.findViewById(R.id.button1);
 		button1.setOnClickListener(new OnChangeSubGroup(this, 1));
@@ -112,6 +111,7 @@ public class FragmentOne extends Fragment {
 	@Override
 	public void onViewCreated(View viewMain, Bundle savedInstanceState) {
 		// ////////////////
+		setSelectedButton(listButton, MainActivityNavig.selected);
 		View view = getActivity().findViewById(R.id.legend);
 		view.setBackgroundResource(R.drawable.shapelegend);
 		bufView = viewMain;

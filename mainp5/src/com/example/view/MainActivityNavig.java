@@ -15,6 +15,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.AlertDialog.Builder;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
@@ -98,8 +99,7 @@ public class MainActivityNavig extends Activity implements NavigationDrawerFragm
 
 		switch (position) {
 		case 0:
-			if (fragment1 == null)
-				fragment1 = new FragmentOne();
+			fragment1 = new FragmentOne();
 			fragmentManager.beginTransaction().replace(R.id.container, fragment1).commit();
 			break;
 		case 1:
