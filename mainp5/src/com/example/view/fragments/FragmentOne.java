@@ -10,6 +10,7 @@ import com.example.controller.OnChangeDay;
 import com.example.controller.OnChangeSubGroup;
 import com.example.p5.R;
 import com.example.view.MainActivityNavig;
+import com.example.xml.DataManager;
 import com.example.xml.XMLSerialize;
 
 import android.app.Fragment;
@@ -115,7 +116,15 @@ public class FragmentOne extends Fragment {
 		View view = getActivity().findViewById(R.id.legend);
 		view.setBackgroundResource(R.drawable.shapelegend);
 		bufView = viewMain;
-		FillLessonAdapter(getSubGroup());
+		DataManager dataManager = new DataManager();
+		try {
+			dataManager = XMLSerialize.read(getActivity());
+			FillLessonAdapter(dataManager.getSubGroup(getActivity()));
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void FillLessonAdapter(int subGroup) {
@@ -126,7 +135,6 @@ public class FragmentOne extends Fragment {
 			List<Lesson> allLessons = new ArrayList<Lesson>();
 			List<Lesson> currentList = new ArrayList<Lesson>();
 			allLessons = XMLSerialize.read(this.getActivity()).lessonData.get(subGroup-1).list;
-			Log.d("azaza23", String.valueOf(MainActivityNavig.selected));
 			for (Lesson obj : allLessons) {
 				if (obj.getDay() == MainActivityNavig.selected)
 					currentList.add(obj);
@@ -145,6 +153,9 @@ public class FragmentOne extends Fragment {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			mylist.setAdapter(null);
+
+			Log.d("azaza228", String.valueOf(subGroup));
+			Log.d("azaza228", e.toString());
 		}
 	}
 

@@ -143,7 +143,6 @@ public class FragmentTwo extends Fragment {
 					}
 					catch (Exception e) { 
 						e.printStackTrace();
-						Log.d("azaza23", e.toString());
 					}
 				}
 			}
